@@ -80,31 +80,31 @@ By Ralf Pinheiro, Tristan Berezowski, and Vincent Wong
 
 #### Database Storage
 
-  1. order
+  1. orders
     - id          (primary)
     - pickup_time
     - timestamp
   
-  2. product
+  2. products
     - id          (primary)
     - name
     - image
     - description
     - price
   
-  3. product_order
+  3. product_orders
     - id          (primary)
     - product_id  (foreign)
     - quantity
     - order_id    (foreign)
   
-  4. user
+  4. users
     - id          (primary)
     - phone number
     - name
     - order_id    (foreign)
 
-  5. restaurant
+  5. restaurants
     - id          (primary)
     - password
 
