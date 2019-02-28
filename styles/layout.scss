@@ -7,6 +7,10 @@ body {
   color: $paragraph-color;
 }
 
+a {
+  color: $heading-color !important;
+}
+
 h1,
 h2,
 h3,
@@ -57,7 +61,7 @@ header .admin-btn {
   height: auto;
   display: flex;
   flex-wrap: wrap;
-  // margin: -10px;
+  color: $paragraph-color;
 }
 
 #product-container article {
@@ -65,10 +69,9 @@ header .admin-btn {
   margin: 20px;
 }
 
-.product-price {
-  position: absolute;
-  top: 214px;
-  right: 25px;
+.product-header {
+  display: inline-block;
+  width: 100%;
 }
 
 .product-form {
@@ -93,6 +96,7 @@ header .admin-btn {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  color: $paragraph-color;
 }
 
 .quantity-btn:hover {
@@ -123,6 +127,7 @@ header .admin-btn {
 }
 
 input#quantity {
+  color: $paragraph-color;
   text-align: right;
   border: none;
   border-top: 1px solid #ddd;
@@ -136,4 +141,11 @@ input[type="quantity"]::-webkit-inner-spin-button,
 input[type="quantity"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.add-to-cart-btn {
+  background-color: $heading-color;
+  padding: 12px 20px 12px 20px;
+  color: $primary-color;
+  border: none;
 }
