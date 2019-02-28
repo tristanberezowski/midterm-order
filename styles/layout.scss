@@ -50,21 +50,6 @@ header .admin-btn {
   text-align: center;
   padding-top: 130px;
   padding-bottom: 40px;
-  z-index: -10;
-}
-
-#side-bar {
-  position: fixed;
-  top: 85px;
-  padding: 30px;
-  right: 0;
-  background-color: #f1f1f1;
-  width: 260px;
-  height: 100%;
-}
-
-#side-bar h3 {
-  color: $paragraph-color;
 }
 
 #product-container {
