@@ -11,15 +11,22 @@ exports.seed = function (knex, Promise) {
 
           name: 'hot dog',
           description: 'costco',
-          price: '3.33'
+          price: 3.33,
+          img: './images/flag.png'
         }),
-        knex('orders').insert({
+        knex('products').insert({
 
-          time_stamp: '2008-02-25 17:23:10.111189-08'
+          name: 'burger',
+          description: 'mcd',
+          price: 4.66,
+          img: './images/heart.png'
         }),
-        knex('product_orders').insert({
+        knex('products').insert({
 
-          quantity: '4'
+          name: 'pizza',
+          description: 'hut',
+          price: 7.55,
+          img: './images/refresh.png'
         })
       ]);
     });
