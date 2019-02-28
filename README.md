@@ -98,9 +98,9 @@ By Ralf Pinheiro, Tristan Berezowski, and Vincent Wong
     - quantity
     - order_id    (foreign)
   
-  4. users
+  4. guests
     - id          (primary)
-    - phone number
+    - phone_number
     - name
     - order_id    (foreign)
 

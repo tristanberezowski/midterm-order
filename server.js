@@ -16,7 +16,7 @@ const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
 // Seperated Routes for each Resource
-const usersRoutes = require("./routes/users");
+const resourceRoutes = require("./routes/resources");
 const indexRoutes = require("./routes/index");
 const ownerRoutes = require("./routes/owner");
 
@@ -38,8 +38,8 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
-// Mount all resource routes
-app.use("/api/users", usersRoutes(knex));
+// Mount resource route
+app.use("/api", resourceRoutes(knex));
 
 // Mount all other routes
 app.use("/owner", ownerRoutes());

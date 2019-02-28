@@ -6,7 +6,7 @@ $(document).ready(function() {
     <div class="card">
       <img
         class="card-img-top"
-        src="${product.image}"
+        src="${product.img}"
         alt=""
       />
       <div class="card-body">
