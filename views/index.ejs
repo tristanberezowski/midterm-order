@@ -9,11 +9,94 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script>
+      $(".add").click(function() {
+        if (
+          $(this)
+            .prev()
+            .val() < 3
+        ) {
+          $(this)
+            .prev()
+            .val(
+              +$(this)
+                .prev()
+                .val() + 1
+            );
+        }
+      });
+      $(".sub").click(function() {
+        if (
+          $(this)
+            .next()
+            .val() > 1
+        ) {
+          if (
+            $(this)
+              .next()
+              .val() > 1
+          )
+            $(this)
+              .next()
+              .val(
+                +$(this)
+                  .next()
+                  .val() - 1
+              );
+        }
+      });
+    </script>
   </head>
 
   <body>
     <header><% include ./partials/_header %></header>
 
-    <h1>Index Page</h1>
+    <aside id="side-bar" class="">
+      <h3>Your Order</h3>
+    </aside>
+
+    <h1 class="main-heading">Menu</h1>
+
+    <section id="product-container" class="d-flex flex-wrap justify-content-center">
+      <article class="order-1 product1">
+        <div class="card">
+          <img
+            class="card-img-top"
+            src="//cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg"
+            alt=""
+          />
+          <div class="card-body">
+            <h5 class="card-title">Product 1</h5>
+            <h6 class="product-price">$ 4,50</h6>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the bulk of the card's content.
+            </p>
+            <div id="field1">
+              field 1
+              <button type="button" id="sub" class="sub">-</button>
+              <input type="number" id="1" value="1" min="1" max="15" />
+              <button type="button" id="add" class="add">+</button>
+            </div>
+            <form method="POST" action="/">
+              <button href="#" class="btn btn-primary">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+      </article>
+
+      <form type="order" method="POST" action="/">
+        <button href="#" type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <article class="order-2 product2"></article>
+
+      <article class="order-3 product3"></article>
+
+      <article class="order-4 product4"></article>
+
+      <article class="order-5 product5"></article>
+
+      <article class="order-6 product6"></article>
+    </section>
   </body>
 </html>
