@@ -18,7 +18,9 @@ module.exports = knex => {
       .from("products")
       .orderBy("id")
       .then(products => {
-        let templateVars = { items: products };
+        let templateVars = {
+          items: products
+        };
         res.render("index", templateVars);
       })
       .catch(err => {
@@ -30,8 +32,7 @@ module.exports = knex => {
   router.post("/", (req, res) => {
     var newOrder = req.body.order;
     knex("orders")
-      .insert(
-        {
+      .insert({
           time_stamp: knex.fn.now()
         },
         ["id"]
@@ -43,7 +44,7 @@ module.exports = knex => {
       .catch(err => {
         throw err;
       });
-  // });
+  });
 
   // router.get("/:order", (req, res) => {
   //   knex.select(users.name, users.phone_number, product_orders.quantity, products.price, products.name, description)
