@@ -16,16 +16,23 @@
 
   <body>
     <header><% include ./partials/_header %></header>
-    <section id="side-bar" class="">
+    <section id="side-bar">
+      <article class="side-bar-head">
         <h4>Foody - Your Order</h4>
+        <h5>Total</h5>
+        <h6>$ 19.99</h6>
+        <button class="checkout-btn">Checkout</button>
+      </article>
         <article class="cart-item">
             <div class="row">
-                <div class="col-md-1 .offset-md-1">3</div>
-                <div class="col-12 col-md-6">Hot Dog</div>
+                <div class="col-12 col-md-2 quantity"><b>15</b></div>
+                <div class="col-12 col-md-7 item-name"><b>Gourmet Hot Dog</b></div>
                 <div class="col-12 col-md-3">$ 3,99</div>
-        
               </div>
-
+              <div  class="remove-btn">
+                  <a href="#">Remove</a>
+              </div>
+            
         </article>
         </section> 
 
@@ -40,8 +47,10 @@
             alt=""
           />
           <div class="card-body">
-            <h5 class="card-title">Product 1</h5>
-            <h6 class="product-price">$ 4,50</h6>
+            <div class="row">
+              <div class="col-12 col-md-8"><h5 class="card-title">Product 1</h5></div>
+              <div class="col-12 col-md-4"><h6 class="product-price">$ 4,50</h6></div>
+            </div>
             <p class="card-text">
               Some quick example text to build on the card title and make up the bulk of the card's content.
             </p>
@@ -55,7 +64,7 @@
               </div>
             </br>
           </br>
-              <button href="#" class="btn btn-primary">Add to Cart</button>
+              <button href="#" class="add-to-cart-btn">Add to Cart</button>
             </form>
           </div>
         </div>
