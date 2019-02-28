@@ -7,6 +7,7 @@ const ENV         = process.env.ENV || "development";
 const express     = require("express");
 const bodyParser  = require("body-parser");
 const sass        = require("node-sass-middleware");
+const cookieSession = require('cookie-session');
 const app         = express();
 
 const knexConfig  = require("./knexfile");
@@ -17,6 +18,7 @@ const knexLogger  = require('knex-logger');
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const indexRoutes = require("./routes/index");
+const ownerRoutes = require("./routes/owner");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -40,8 +42,9 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 
 // Mount all other routes
-
+app.use("/owner", ownerRoutes());
 app.use("/", indexRoutes(knex));
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

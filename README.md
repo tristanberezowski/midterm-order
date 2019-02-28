@@ -132,7 +132,6 @@ By Ralf Pinheiro, Tristan Berezowski, and Vincent Wong
 ###### HTML/CDN links
   1. Jquery
   2. Bootstrap
-  3. 
 
 ### Define Routes
 
