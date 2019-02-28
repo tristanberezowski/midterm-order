@@ -31,5 +31,17 @@ module.exports = (knex) => {
     })
   });
 
+  router.get("/:order", (req, res) => {
+    knex.select(users.name, users.phone_number, product_orders.quantity, products.price, products.name, description)
+        .from('products')
+        .innerJoin('product_orders','product_orders.product_id','products.id')
+        .innerJoin('users','users.order_id',req.params.order)
+        .asCallback(function(err, rows) {
+          if (err) throw err;
+          
+          console.log(rows);
+        })
+  })
+
   return router;
 }

@@ -100,7 +100,7 @@ By Ralf Pinheiro, Tristan Berezowski, and Vincent Wong
   
   4. users
     - id          (primary)
-    - phone number
+    - phone_number
     - name
     - order_id    (foreign)
 
