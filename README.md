@@ -132,18 +132,17 @@ By Ralf Pinheiro, Tristan Berezowski, and Vincent Wong
 ###### HTML/CDN links
   1. Jquery
   2. Bootstrap
-  3. 
 
 ### Define Routes
 
   1. Index "/"
-    -get: index loads and you can make a new order from this page 
-    -post: create the order object and redirect to order page
+    - get: index loads and you can make a new order from this page 
+    - post: create the order object and redirect to order page
   2. Order Page "/:order"
-    -get: loads all data from order of order.id = req.params.order
-    -post: submit the order, text the restaurant and update page once successful
+    - get: loads all data from order of order.id = req.params.order
+    - post: submit the order, text the restaurant and update page once successful
   3. Restaurant list "/owner"
-    -get: loads all orders placed with links to each order page
-    -submitting orders posts to "/owner/:id"
+    - get: loads all orders placed with links to each order page
+    - submitting orders posts to "/owner/:id"
   4. Restaurant order "/owner/:id"
-    -post: submit time for pickup
+    - post: submit time for pickup

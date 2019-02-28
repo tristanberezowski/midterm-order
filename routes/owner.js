@@ -1,0 +1,16 @@
+"use strict";
+
+const express = require('express');
+const router  = express.Router();
+
+module.exports = function(){
+  
+  router.get("/", (req, res) => {
+    //if (req.session.owner)
+    res.render('restaurant');
+    //else
+    //  res.render("index");
+  });
+  return router;
+}
+//note: incomplete file
