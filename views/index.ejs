@@ -10,41 +10,19 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script>
-      $(".add").click(function() {
-        if (
-          $(this)
-            .prev()
-            .val() < 3
-        ) {
-          $(this)
-            .prev()
-            .val(
-              +$(this)
-                .prev()
-                .val() + 1
-            );
-        }
-      });
-      $(".sub").click(function() {
-        if (
-          $(this)
-            .next()
-            .val() > 1
-        ) {
-          if (
-            $(this)
-              .next()
-              .val() > 1
-          )
-            $(this)
-              .next()
-              .val(
-                +$(this)
-                  .next()
-                  .val() - 1
-              );
-        }
-      });
+     function up(max) {
+    document.getElementById("myNumber").value = parseInt(document.getElementById("myNumber").value) + 1;
+    if (document.getElementById("myNumber").value >= parseInt(max)) {
+        document.getElementById("myNumber").value = max;
+    }
+}
+function down(min) {
+    document.getElementById("myNumber").value = parseInt(document.getElementById("myNumber").value) - 1;
+    if (document.getElementById("myNumber").value <= parseInt(min)) {
+        document.getElementById("myNumber").value = min;
+    }
+}
+
     </script>
   </head>
 
@@ -71,12 +49,12 @@
             <p class="card-text">
               Some quick example text to build on the card title and make up the bulk of the card's content.
             </p>
-            <div id="field1">
-              field 1
-              <button type="button" id="sub" class="sub">-</button>
-              <input type="number" id="1" value="1" min="1" max="15" />
-              <button type="button" id="add" class="add">+</button>
-            </div>
+            <div>
+                <label>Quantity: </label>
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button id="down" class="btn btn-default" onclick=" down('0')"><span class="glyphicon glyphicon-minus"></span></button>
+                    </div>
             <form method="POST" action="/">
               <button href="#" class="btn btn-primary">Add to Cart</button>
             </form>
