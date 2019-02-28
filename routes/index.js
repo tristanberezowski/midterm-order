@@ -14,7 +14,14 @@ module.exports = (knex) => {
   }
 
   router.get("/", (req, res) => {
-    res.render("index");
+    knex.select("*").from("products")
+      .then((products) => {
+        res.render("index", products);
+      })
+      .catch((err) => {
+        console.error("Failure in getting items from database");
+        throw err;
+      })
   });
 
   router.post("/", (req, res) => {
@@ -38,7 +45,7 @@ module.exports = (knex) => {
         .innerJoin('users','users.order_id',req.params.order)
         .asCallback(function(err, rows) {
           if (err) throw err;
-          
+
           console.log(rows);
         })
   })
