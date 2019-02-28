@@ -5,10 +5,10 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
-  function createProductOrder(orderId) {
+  function createProductOrder(orderId, order) {
     knex('product_orders').insert({
-      quantity: 2,
-      product_id: 1,
+      quantity: order.quantity,
+      product_id: order.id,
       order_id: orderId
     });
   }
@@ -18,18 +18,17 @@ module.exports = (knex) => {
   });
 
   router.post("/", (req, res) => {
-    let newOrder = req.body;
-    console.log(req.body.order)
-    res.redirect('/')
-    // knex('orders').insert({
-    //   //data
-    // }, ['id'])
-    // .then(id => {
-    //   createProductOrder(id);
-    // })
-    // .catch(err => {
-    //   throw err;
-    // })
+    var newOrder = req.body.order;
+    knex('orders').insert({
+      time_stamp: knex.fn.now()
+    }, ['id'])
+    .then(id => {
+      console.log(id);
+      createProductOrder(id, newOrder);
+    })
+    .catch(err => {
+      throw err;
+    })
   });
 
   return router;
