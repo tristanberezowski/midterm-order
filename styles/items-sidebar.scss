@@ -1,0 +1,26 @@
+$primary-color: #f9f9f9;
+$heading-color: #dd3b3b;
+$paragraph-color: #505050;
+
+#side-bar {
+  position: fixed;
+  top: 85px;
+  right: 0;
+  background-color: #f1f1f1;
+  width: 335px;
+  height: 100%;
+}
+
+#side-bar h4 {
+  color: $heading-color;
+  padding: 35px 30px 10px 30px;
+}
+
+.cart-item {
+  margin-top: 35px;
+  border-top: 1px solid #ccc;
+  padding: 15px 20px 15px 20px;
+}
+
+.cart-item .col-md-2 {
+}
