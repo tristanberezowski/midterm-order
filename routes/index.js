@@ -43,7 +43,7 @@ module.exports = knex => {
       .catch(err => {
         throw err;
       });
-  // });
+  });
 
   // router.get("/:order", (req, res) => {
   //   knex.select(users.name, users.phone_number, product_orders.quantity, products.price, products.name, description)
