@@ -18,16 +18,18 @@ module.exports = (knex) => {
   });
 
   router.post("/", (req, res) => {
-    let newOrder = req.body.order;
-    knex('orders').insert({
-      
-    }, ['id'])
-    .then(id => {
-      createProductOrder(id);
-    })
-    .catch(err => {
-      throw err;
-    })
+    let newOrder = req.body;
+    console.log(req.body.order)
+    res.redirect('/')
+    // knex('orders').insert({
+    //   //data
+    // }, ['id'])
+    // .then(id => {
+    //   createProductOrder(id);
+    // })
+    // .catch(err => {
+    //   throw err;
+    // })
   });
 
   return router;
