@@ -3,7 +3,7 @@ exports.up = function (knex, Promise) {
   return knex.schema.createTable('orders', function (table) {
     table.increments('id');
     table.integer('pick_up_time');
-    table.timestamp('time_stamp');
+    table.timestamp('time_stamp').defaultTo(knex.fn.now());
 
   }).createTable('products', function (table) {
     table.increments('id');
@@ -14,15 +14,15 @@ exports.up = function (knex, Promise) {
 
   }).createTable('product_orders', function (table) {
     table.increments('id');
-    table.integer('order_id').unsigned().references('orders.id')
-    table.integer('product_id').unsigned().references('products.id')
+    table.integer('order_id').references('orders.id').onDelete('CASCADE');
+    table.integer('product_id').references('products.id').onDelete('CASCADE');
     table.integer('quantity');
 
   }).createTable('guests', function (table) {
     table.increments('id');
     table.varchar('name');
     table.integer('phone');
-    table.integer('order_id').references('id').inTable('orders');
+    table.integer('order_id').references('orders.id').onDelete('CASCADE');
 
   }).createTable('restaurants', function (table) {
     table.increments('id');
@@ -31,13 +31,13 @@ exports.up = function (knex, Promise) {
 };
 
 exports.down = function (knex, Promise) {
-  return knex.schema.dropTable('orders')
-    .dropTable('products')
-    .dropTable('product_orders')
-    .dropTable('guests')
-    .dropTable('restaurants');
-};
+  return Promise.all([
+    knex.raw('DROP TABLE products CASCADE'),
+    knex.raw('DROP TABLE product_orders CASCADE'),
+    knex.raw('DROP TABLE guests CASCADE'),
+    knex.raw('DROP TABLE restaurants CASCADE'),
+    knex.raw('DROP TABLE orders CASCADE'),
+  ])
 
-// table.foreign('order_id').references('orders.id');
-// table.foreign('product_id').references('products.id');
-// table.foreign('order_id').references('orders.id');
+
+};
