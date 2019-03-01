@@ -4,13 +4,14 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = knex => {
-  // function createProductOrder(orderId, order) {
-  //   knex('product_orders').insert({
-  //     quantity: order.quantity,
-  //     product_id: order.id,
-  //     order_id: orderId
-  //   });
-  // }
+
+  function createProductOrder(orderId, order) { //insert single product_order
+    knex('product_orders').insert({
+      quantity: order.quantity,
+      product_id: order.id,
+      order_id: orderId
+    }).then(() => {}).catch((err) => {throw err});
+  }
 
   router.get("/", (req, res) => {
     knex
@@ -30,19 +31,21 @@ module.exports = knex => {
   });
 
   router.post("/", (req, res) => {
-    var newOrder = req.body.order;
+    const newOrder = req.body.order; //for json testing, change to req.body
     knex("orders")
       .insert({
-          time_stamp: knex.fn.now()
         },
-        ["id"]
+        ["id"] //this will give idInside as the return value to this promise
       )
-      .then(id => {
-        console.log(id);
-        createProductOrder(id, newOrder);
+      .then(idInside => { //idInside is an array containing anonymour objects: [anonymous{id:20}]
+        let id = idInside[0].id;
+        for(let singleOrder of newOrder) {
+          createProductOrder(id, singleOrder);
+        }
+        res.redirect("/" + id + "/");
       })
       .catch(err => {
-        throw err;
+        console.error(err);
       });
   });
 
@@ -55,7 +58,7 @@ module.exports = knex => {
          .where('orders.id', req.params.order)
          .asCallback(function(err, rows) {
           if (err) throw err;
-          res.render("restaurant", rows);
+          res.render("client", rows);
          })
   })
 
