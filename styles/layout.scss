@@ -57,7 +57,7 @@ header .admin-btn {
 }
 
 #product-container {
-  width: 80%;
+  width: 70%;
   height: auto;
   display: flex;
   flex-wrap: wrap;
@@ -65,8 +65,8 @@ header .admin-btn {
 }
 
 #product-container article {
-  flex: 1 1 300px;
-  margin: 20px;
+  flex: 1 1;
+  margin: 10px;
 }
 
 .product-header {
@@ -103,20 +103,20 @@ header .admin-btn {
   cursor: pointer;
 }
 
-.product-form #decrease {
+.product-form .decrease {
   margin-right: -4px;
   border-radius: 8px 0 0 8px;
   margin-top: -3px;
 }
 
-.product-form #increase {
+.product-form .increase {
   margin-left: -4px;
   border-radius: 0 8px 8px 0;
   margin-top: -3px;
 }
 
-.product-form #increase span,
-.product-form #decrease span {
+.product-form .increase span,
+.product-form .decrease span {
   position: relative;
   top: -5px;
 }
@@ -126,7 +126,7 @@ header .admin-btn {
   padding: 0px;
 }
 
-input#quantity {
+input.quantity-input {
   color: $paragraph-color;
   text-align: right;
   border: none;
@@ -137,8 +137,8 @@ input#quantity {
   height: 40px;
 }
 
-input[type="quantity"]::-webkit-inner-spin-button,
-input[type="quantity"]::-webkit-outer-spin-button {
+input[type="quantity-input"]::-webkit-inner-spin-button,
+input[type="quantity-input"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

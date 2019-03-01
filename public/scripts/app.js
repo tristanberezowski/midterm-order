@@ -2,13 +2,9 @@ $(document).ready(function() {
   const createProductMenu = function(product) {
     //returns jquery object
     let menuHtml = `
-    <article class="order-1 product1">
+    <article class="p-2">
     <div class="card">
-      <img
-        class="card-img-top"
-        src="${product.img}"
-        alt=""
-      />
+      <img class="card-img-top" src="${product.img}"/>
       <div class="card-body">
         <div class="row">
           <div class="col-12 col-md-8"><h5 class="card-title">${product.name}</h5></div>
@@ -16,11 +12,11 @@ $(document).ready(function() {
         </div>
         <p class="card-text">${product.description}</p>
         <form class="product-form" method="POST" action="/">
-          <div class="quantity-btn" id="decrease" onclick="decreaseValue()" value="Decrease Value">
+          <div class="decrease quantity-btn" onclick="decreaseValue()" value="Decrease Value">
             <span>-</span>
           </div>
-          <input type="number" id="quantity" value="0" />
-          <div class="quantity-btn" id="increase" onclick="increaseValue()" value="Increase Value">
+          <input type="number" class="quantity-input" value="0" />
+          <div class="increase quantity-btn" onclick="increaseValue()" value="Increase Value">
             <span>+</span>
           </div>
         </br>
@@ -45,4 +41,5 @@ $(document).ready(function() {
       }
     });
   });
-}); //closes JQuery function
+  //closes JQuery function
+});
