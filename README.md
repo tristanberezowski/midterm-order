@@ -82,8 +82,8 @@ By Ralf Pinheiro, Tristan Berezowski, and Vincent Wong
 
   1. orders
     - id          (primary)
-    - pickup_time
-    - timestamp
+    - pick_up_time
+    - time_stamp
   
   2. products
     - id          (primary)
@@ -100,7 +100,7 @@ By Ralf Pinheiro, Tristan Berezowski, and Vincent Wong
   
   4. guests
     - id          (primary)
-    - phone_number
+    - phone
     - name
     - order_id    (foreign)
 
