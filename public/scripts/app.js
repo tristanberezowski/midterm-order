@@ -6,11 +6,23 @@ $(document).ready(function() {
     $(".quantity-input").val("");
     addToCart(cartItem);
   });
-
+  // Event listener to remove items from cart
   $("#side-bar").on("click", ".remove-btn", function() {
     const $parent = $(this).parent();
     $parent.remove();
   });
+
+  // Checks if cart has something inside and gets the order total
+
+  function cartTotal() {
+    if ($("#side-bar").has(".cart-item")) {
+      // let totalOrder = $(".quantity-input");
+      console.log("Cart has Item");
+    } else {
+      console.log("Cart is Empty");
+    }
+  }
+  cartTotal();
 
   const createProductMenu = function(product) {
     //returns jquery object
