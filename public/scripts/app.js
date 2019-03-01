@@ -2,7 +2,7 @@ function infoForCart($element) {
 const name = $(".card-title", $element).text();
 const price = $(".product-price", $element).text();
 const quantity = $(".quantity-input", $element).val();
-const totalItem = (quantity * price).toFixed(2);
+const totalItem = (Number(quantity) * Number(price));
 return { name: name, price: price, quantity: quantity, total: totalItem };
 }
 
@@ -12,7 +12,6 @@ if (Number($quantityInput.val()) < 1) {
   alert("Please add at least 1 item.");
 } else {
   addToCart(cartItem);
-  cartTotal();
 }
 };
 
@@ -49,8 +48,13 @@ let $menuHtml = $(menuHtml);
 return $menuHtml;
 };
 
-function cartTotal() {
-
+function cartTotal(cart) {
+  let total = 0;
+  console.log(cart);
+  for (let i = 0; i < cart.length; i++) {
+    total += cart[i].total;
+  }
+  $('.total').text('Total: $' + Number(total).toFixed(2));
 }
 
 // Creates html structure in the cart
@@ -70,36 +74,31 @@ return $("#side-bar").append(cartItem);
 }
 
 $(() => {
-  
 
-  var cart = [];
+  const cart = [];
 
   // Event listener to add items to cart
   $("#product-container").on("click", ".add-to-cart-btn", function() {
     const $parent = $(this).parent();
     const cartItem = infoForCart($parent);
+    console.log("cI",cartItem);
+    console.log("cart",cart)
     cart.push(cartItem);
     checkQuantity(cartItem, $parent.children(".quantity-input"));
+    console.log("cart",cart);
+    cartTotal(cart);
   });
 
   // Event listener to remove items from cart
   $("#side-bar").on("click", ".remove-btn", function() {
-    console.log(cart);
     const $parent = $(this).parent();
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].name === $parent.find(".item-name").text())
         cart.splice(i, 1);
     }
-    console.log(cart);
     $parent.remove();
+    cartTotal(cart);
   });
-  cartTotal();
-  
-  
-
-  
-
-  
 
   // Ajax request to create products menu
   $(() => {
