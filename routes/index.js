@@ -47,16 +47,16 @@ module.exports = knex => {
   });
 
   router.get("/:order", (req, res) => {
-    knex.from('products')
-        .innerJoin('product_orders','product_orders.product_id','products.id')
-        .innerJoin('guests','guests.order_id',req.params.order)
-        .select(guests.name, guests.phone_number, product_orders.quantity, products.price, products.name, description)
-        .asCallback(function(err, rows) {
+     knex.from('products')
+         .innerJoin('product_orders','product_orders.product_id','products.id')
+         .innerJoin('orders','orders.id','product_orders.order_id')
+         .innerJoin('guests','guests.order_id', 'orders.id')
+         .select("guests.name", "guests.phone", "product_orders.quantity", "products.price", "products.name", "description")
+         .where('orders.id', req.params.order)
+         .asCallback(function(err, rows) {
           if (err) throw err;
-          console.log(rows);
-          let templateVars = {}
-          res.render("index");
-        })
+          res.render("restaurant", rows);
+         })
   })
 
   return router;
