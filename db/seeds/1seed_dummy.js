@@ -10,21 +10,21 @@ exports.seed = function (knex, Promise) {
         knex('products').insert({
           id: 1,
           name: 'hot dog',
-          description: 'textTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXT',
+          description: 'textTEXTtextTEXT',
           price: 3.33,
-          img: './images/flag.png'
+          img: './images/hot_dog.jpg'
         }),
         knex('products').insert({
           id: 2,
           name: 'burger',
           description: 'mcd',
           price: 4.66,
-          img: './images/heart.png'
+          img: './images/hot_dog.jpg'
         }),
         knex('products').insert({
           id: 3,
           name: 'pizza',
-          description: 'textTEXTtextTEXTtextTEXTtextTEXTtextTEXTtext',
+          description: 'textTEXTtextTEXTtextTEXTtextTEX',
           price: 7.55,
           img: './images/refresh.png'
         }),
@@ -40,35 +40,35 @@ exports.seed = function (knex, Promise) {
           name: 'fries',
           description: 'textTEXTtextTEXTtextxtTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXT',
           price: 1.95,
-          img: './images/refresh.png'
+          img: './images/hot_dog.jpg'
         }),
         knex('products').insert({
           id: 6,
           name: 'soda',
           description: 'textTEXTtextTEXTtexTtetTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXTtextTEXT',
           price: 0.95,
-          img: './images/refresh.png'
+          img: './images/hot_dog.jpg'
         }),
         knex('products').insert({
           id: 7,
           name: 'ramen',
           description: 'shio',
           price: 8.73,
-          img: './images/refresh.png'
+          img: './images/hot_dog.jpg'
         }),
         knex('products').insert({
           id: 8,
           name: 'gyoza',
           description: 'pork',
           price: 4.85,
-          img: './images/refresh.png'
+          img: './images/hot_dog.jpg'
         }),
         knex('products').insert({
           id: 9,
           name: 'rice',
           description: 'fried',
           price: 6.98,
-          img: './images/refresh.png'
+          img: './images/hot_dog.jpg'
         }),
       ]);
     });

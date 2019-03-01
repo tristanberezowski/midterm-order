@@ -4,12 +4,14 @@ const express = require("express");
 const router = express.Router();
 module.exports = knex => {
 
-  function addPickup() = {
+  //CHECK ALL VARIBLES, QUERIES, AND ROUTE NAMES
+
+  function addPickup() {
     knex('orders')
-    .where('ID FOR PARTICULAR ORDER')
-    .update({
-      pick_up_time: 'form_field_input'
-    })
+      .where('ID FOR THIS PARTICULAR ORDER')
+      .update({
+        pick_up_time: 'form_field_input'
+      })
   }
 
   $(() => {
@@ -17,21 +19,21 @@ module.exports = knex => {
     $('confirm-order-button-id').on('submit', (event) => {
       event.preventDefault();
 
-      if ('order.id') {
-        //update pick up time by order.id
-        addPickup();
+      //update pick up time by order.id
+      knex('orders')
+        .where('ID FOR THIS PARTICULAR ORDER')
+        .then(() => {
+          addPickup();
+          // send sms to guest.phone_number
+        })
 
-        // send sms to guest.phone_number
+        .catch((err) => {
+          console.log('query obj DNE', err);
+        });
 
-      }
-      .fail((err) => {
-        console.log(err);
-      });
+      //function to adjust order UI on owner page
+
     });
 
-    //function to adjust UI on owner page
-
   });
-
-
 }
