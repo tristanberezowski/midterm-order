@@ -46,17 +46,18 @@ module.exports = knex => {
       });
   });
 
-  // router.get("/:order", (req, res) => {
-  //   knex.select(users.name, users.phone_number, product_orders.quantity, products.price, products.name, description)
-  //       .from('products')
-  //       .innerJoin('product_orders','product_orders.product_id','products.id')
-  //       .innerJoin('users','users.order_id',req.params.order)
-  //       .asCallback(function(err, rows) {
-  //         if (err) throw err;
-
-  //         console.log(rows);
-  //       })
-  // })
+  router.get("/:order", (req, res) => {
+    knex.from('products')
+        .innerJoin('product_orders','product_orders.product_id','products.id')
+        .innerJoin('guests','guests.order_id',req.params.order)
+        .select(guests.name, guests.phone_number, product_orders.quantity, products.price, products.name, description)
+        .asCallback(function(err, rows) {
+          if (err) throw err;
+          console.log(rows);
+          let templateVars = {}
+          res.render("index");
+        })
+  })
 
   return router;
 };
