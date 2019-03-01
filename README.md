@@ -48,11 +48,11 @@ By Ralf Pinheiro, Tristan Berezowski, and Vincent Wong
 ## Data Needed For MVP
 
 - Webpages
-1. (order) index page
+1. (order) index page  (index.ejs)
   - items to add to new order
-2. client view/submit order page
+2. order view/submit page (order.ejs)
   - all items selected and buttons
-3. restaurant view orders list
+3. restaurant view orders list (restaurant.ejs)
   - list all orders submitted
   - order expands to view/accept/specify single order
 

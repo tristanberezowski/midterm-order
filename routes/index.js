@@ -58,7 +58,7 @@ module.exports = knex => {
       .where('orders.id', req.params.order)
       .asCallback(function (err, rows) {
         if (err) throw err;
-        res.render("restaurant", rows);
+        res.render("order", rows);
       })
   })
 
