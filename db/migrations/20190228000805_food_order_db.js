@@ -1,33 +1,34 @@
 exports.up = function (knex, Promise) {
   console.log(process.env);
-  return knex.schema.createTable('orders', function (table) {
-    table.increments('id');
-    table.integer('pick_up_time');
-    table.timestamp('time_stamp').defaultTo(knex.fn.now());
+  return knex.schema
+    .createTable('orders', function (table) {
+      table.increments('id');
+      table.integer('pick_up_time');
+      table.timestamp('time_stamp').defaultTo(knex.fn.now());
 
-  }).createTable('products', function (table) {
-    table.increments('id');
-    table.varchar('name');
-    table.varchar('description');
-    table.float('price');
-    table.string('img');
+    }).createTable('products', function (table) {
+      table.increments('id');
+      table.varchar('name');
+      table.varchar('description');
+      table.float('price');
+      table.string('img');
 
-  }).createTable('product_orders', function (table) {
-    table.increments('id');
-    table.integer('order_id').references('orders.id').onDelete('CASCADE');
-    table.integer('product_id').references('products.id').onDelete('CASCADE');
-    table.integer('quantity');
+    }).createTable('product_orders', function (table) {
+      table.increments('id');
+      table.integer('order_id').references('orders.id').onDelete('CASCADE');
+      table.integer('product_id').references('products.id').onDelete('CASCADE');
+      table.integer('quantity');
 
-  }).createTable('guests', function (table) {
-    table.increments('id');
-    table.varchar('name');
-    table.integer('phone');
-    table.integer('order_id').references('orders.id').onDelete('CASCADE');
+    }).createTable('guests', function (table) {
+      table.increments('id');
+      table.varchar('name');
+      table.integer('phone');
+      table.integer('order_id').references('orders.id').onDelete('CASCADE');
 
-  }).createTable('restaurants', function (table) {
-    table.increments('id');
-    table.varchar('password');
-  });
+    }).createTable('restaurants', function (table) {
+      table.increments('id');
+      table.varchar('password');
+    });
 };
 
 exports.down = function (knex, Promise) {
@@ -37,6 +38,8 @@ exports.down = function (knex, Promise) {
     knex.raw('DROP TABLE guests CASCADE'),
     knex.raw('DROP TABLE restaurants CASCADE'),
     knex.raw('DROP TABLE orders CASCADE'),
+    knex.raw('DROP TABLE users CASCADE'),
+
   ])
 
 
