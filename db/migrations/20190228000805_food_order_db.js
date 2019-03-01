@@ -22,7 +22,7 @@ exports.up = function (knex, Promise) {
     }).createTable('guests', function (table) {
       table.increments('id');
       table.varchar('name');
-      table.integer('phone');
+      table.varchar('phone');
       table.integer('order_id').references('orders.id').onDelete('CASCADE');
 
     }).createTable('restaurants', function (table) {
@@ -38,7 +38,6 @@ exports.down = function (knex, Promise) {
     knex.raw('DROP TABLE guests CASCADE'),
     knex.raw('DROP TABLE restaurants CASCADE'),
     knex.raw('DROP TABLE orders CASCADE'),
-    knex.raw('DROP TABLE users CASCADE'),
 
   ])
 

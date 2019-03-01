@@ -1,34 +1,37 @@
 /* owner page, on submit event, inserts field value as an update to
 existing row in orders */
+const express = require("express");
+const router = express.Router();
+module.exports = knex => {
 
-//FNC ABSOLUTELY NOT DONE
+  function addPickup() = {
+    knex('orders')
+    .where('ID FOR PARTICULAR ORDER')
+    .update({
+      pick_up_time: 'form_field_input'
+    })
+  }
 
+  $(() => {
 
-function addPickup() = {
-  knex('orders')
-  .where('ID FOR PARTICULAR ORDER')
-  .update({
-    pick_up_time: 'INTEGERS ONLY'
-  })
-}
+    $('confirm-order-button-id').on('submit', (event) => {
+      event.preventDefault();
 
-$(() => {
+      if ('order.id') {
+        //update pick up time by order.id
+        addPickup();
 
-  $('confirm-order-JQ-classification-change this').on('submit', (event) => {
-    event.preventDefault();
+        // send sms to guest.phone_number
 
-    if ('some requirement for array') {
-      //update pick up time by order.id
-      addPickup();
-
-      // send sms to guest.phone_number
-
-    }
-    .fail((err) => {
-      console.log(err);
+      }
+      .fail((err) => {
+        console.log(err);
+      });
     });
+
+    //function to adjust UI on owner page
+
   });
 
-  //function to adjust UI on owner page
 
-});
+}
