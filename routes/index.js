@@ -5,11 +5,17 @@ const router = express.Router();
 
 module.exports = knex => {
   function createProductOrder(orderId, order) {
-    knex("product_orders").insert({
-      quantity: order.quantity,
-      product_id: order.id,
-      order_id: orderId
-    });
+    //insert single product_order
+    knex("product_orders")
+      .insert({
+        quantity: order.quantity,
+        product_id: order.id,
+        order_id: orderId
+      })
+      .then(() => {})
+      .catch(err => {
+        throw err;
+      });
   }
 
   router.get("/", (req, res) => {
@@ -30,20 +36,22 @@ module.exports = knex => {
   });
 
   router.post("/", (req, res) => {
-    var newOrder = req.body.order;
+    const newOrder = req.body.order; //for json testing, change to req.body
     knex("orders")
       .insert(
-        {
-          time_stamp: knex.fn.now()
-        },
-        ["id"]
+        {},
+        ["id"] //this will give idInside as the return value to this promise
       )
-      .then(id => {
-        console.log(id);
-        createProductOrder(id, newOrder);
+      .then(idInside => {
+        //idInside is an array containing anonymour objects: [anonymous{id:20}]
+        let id = idInside[0].id;
+        for (let singleOrder of newOrder) {
+          createProductOrder(id, singleOrder);
+        }
+        res.redirect("/" + id + "/");
       })
       .catch(err => {
-        throw err;
+        console.error(err);
       });
   });
 
@@ -51,13 +59,20 @@ module.exports = knex => {
     knex
       .from("products")
       .innerJoin("product_orders", "product_orders.product_id", "products.id")
-      .innerJoin("guests", "guests.order_id", req.params.order)
-      .select(guests.name, guests.phone_number, product_orders.quantity, products.price, products.name, description)
+      .innerJoin("orders", "orders.id", "product_orders.order_id")
+      .innerJoin("guests", "guests.order_id", "orders.id")
+      .select(
+        "guests.name",
+        "guests.phone",
+        "product_orders.quantity",
+        "products.price",
+        "products.name",
+        "description"
+      )
+      .where("orders.id", req.params.order)
       .asCallback(function(err, rows) {
         if (err) throw err;
-        console.log(rows);
-        let templateVars = {};
-        res.render("index");
+        res.render("client", rows);
       });
   });
 
