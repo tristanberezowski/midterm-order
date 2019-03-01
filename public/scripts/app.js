@@ -1,29 +1,35 @@
 $(document).ready(function() {
+  // Check if quantity is at least 1
+  const checkQuantity = function(cartItem, $quantityInput) {
+    if (Number($quantityInput.val()) < 1) {
+      alert("Please add at least 1 item.");
+    } else {
+      addToCart(cartItem);
+      cartTotal();
+    }
+  };
   // Event listener to add items to cart
   $("#product-container").on("click", ".add-to-cart-btn", function() {
     const $parent = $(this).parent();
     const cartItem = infoForCart($parent);
-    $(".quantity-input").val("");
-    addToCart(cartItem);
+    checkQuantity(cartItem, $parent.children(".quantity-input"));
   });
+
   // Event listener to remove items from cart
   $("#side-bar").on("click", ".remove-btn", function() {
     const $parent = $(this).parent();
     $parent.remove();
   });
-
-  // Checks if cart has something inside and gets the order total
-
+  // Checks if cart is empty or not
   function cartTotal() {
-    if ($("#side-bar").has(".cart-item")) {
-      // let totalOrder = $(".quantity-input");
+    if ($("#side-bar").has(".cart-item").length) {
       console.log("Cart has Item");
     } else {
       console.log("Cart is Empty");
     }
   }
   cartTotal();
-
+  // Creates restaurant menu
   const createProductMenu = function(product) {
     //returns jquery object
     let menuHtml = `
@@ -41,7 +47,7 @@ $(document).ready(function() {
         <div class="decrease quantity-btn" onclick="decreaseValue()" value="Decrease Value">
           <span>-</span>
         </div>
-        <input type="number" class="quantity-input" value="0" />
+        <input type="number" class="quantity-input" value="0" min="1" step="1" />
         <div class="increase quantity-btn" onclick="increaseValue()" value="Increase Value">
           <span>+</span>
         </div>
