@@ -26,14 +26,14 @@ exports.seed = function (knex, Promise) {
           name: 'pizza',
           description: 'textTEXTtextTEXTtextTEXTtextTEX',
           price: 7.55,
-          img: './images/refresh.png'
+          img: './images/hot_dog.jpg'
         }),
         knex('products').insert({
           id: 4,
           name: 'taco',
           description: 'textTEXTtextTEXTtextTEXTtextTEXTteTEXTtextTEXTtextTEXTtextTEXTtXTtextTEXTtextTEXTtextTEXTtextTEXTtex',
           price: 2.43,
-          img: './images/refresh.png'
+          img: './images/hot_dog.jpg'
         }),
         knex('products').insert({
           id: 5,
