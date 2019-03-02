@@ -6,12 +6,13 @@ const totalItem = (Number(quantity) * Number(price));
 return { name: name, price: price, quantity: quantity, total: totalItem };
 }
 
-const checkQuantity = function(cartItem, $quantityInput) {
+const checkQuantity = function($quantityInput) {
 // Check if quantity is at least 1
 if (Number($quantityInput.val()) < 1) {
   alert("Please add at least 1 item.");
+  return false;
 } else {
-  addToCart(cartItem);
+  return true;
 }
 };
 
@@ -50,7 +51,6 @@ return $menuHtml;
 
 function cartTotal(cart) {
   let total = 0;
-  console.log(cart);
   for (let i = 0; i < cart.length; i++) {
     total += cart[i].total;
   }
@@ -81,12 +81,24 @@ $(() => {
   $("#product-container").on("click", ".add-to-cart-btn", function() {
     const $parent = $(this).parent();
     const cartItem = infoForCart($parent);
-    console.log("cI",cartItem);
-    console.log("cart",cart)
-    cart.push(cartItem);
-    checkQuantity(cartItem, $parent.children(".quantity-input"));
-    console.log("cart",cart);
-    cartTotal(cart);
+    if(checkQuantity($parent.children(".quantity-input"))) {
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].name === cartItem.name)
+          var exists = i; //to avoid 0 being falsey
+      }
+      if (exists !== undefined){ //happens when the item has been selected already
+        cart[exists].quantity = Number(cartItem.quantity) + Number(cart[exists].quantity);
+        $(`.item-name:contains(${cartItem.name})`).prev().text(cart[exists].quantity);
+        cart[exists].total += cartItem.quantity * cartItem.price;
+        $(`.item-name:contains(${cartItem.name}) ~ .item-price`).text(cart[exists].total);
+        cartTotal(cart);  
+      }
+      else {
+        addToCart(cartItem);
+        cart.push(cartItem);
+        cartTotal(cart);
+      }
+    }
   });
 
   // Event listener to remove items from cart
