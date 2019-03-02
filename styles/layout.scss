@@ -20,7 +20,13 @@ h6 {
   color: $heading-color;
 }
 
+button {
+  border-radius: 2px;
+}
+
 header {
+  z-index: 100;
+  background-color: $primary-color;
   position: fixed;
   top: 0;
   width: 100%;
@@ -48,6 +54,10 @@ header .admin-btn {
   color: $primary-color;
   border: none;
   padding: 15px 30px 15px 30px;
+}
+
+.product-id {
+  display: none;
 }
 
 .main-heading {

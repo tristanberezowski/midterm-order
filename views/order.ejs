@@ -1,43 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Client Checkout</title>
 
-<head>
-  <title>Client Checkout</title>
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/order-style.css" type="text/css" />
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-</head>
-
-<body>
-  <header>
-    <% include ./partials/_header %>
-  </header>
-  <div class="container">
-
-    <h1>Your orders</h1>
-    <p>
-      <span class='name'>guest.name</span> <span class='phone'>guest.phone</span>
-
-      <ul>
-        <li class='product1'><span> class=product.img x quantity</span>
-          <span>product.name</span>
-          <span>product.price</span>
-        </li>
-        <li>etc</li>
-        <li>etc</li>
-      </ul>
-      <span class='b4Taxes'>sum(product.price)</span>
-      <span class='taxes'>+ sum(0.12)</span>
-      <span class='afterTaxes'>sum(1.12)</span>
-    </p>
-
-  </div>
-  <input type='submit' class='cancelButton'>
-
-</body>
-
+  <body>
+    <header>
+      <% include ./partials/_header %>
+    </header>
+    <div class="container">
+      <h1 class="order-heading">Your Order</h1>
+      <div class="d-flex justify-content-start order-item">
+        <div class="row">
+          <div class="col-12 col-md-2"><img class="order-item-image" src="./images/hot_dog.jpg" /></div>
+          <div class="col-12 col-md-6 ">
+            <p class="order-item-name">Gourmet Hot Dog</p>
+            <div>
+              <p class="order-item-description">
+                A footlong Vienna Beef hot dog, topped with relish, onions, tomatoes, pickle spears, sport peppers,
+                celery salt, and served on a giant, gourmet poppy seed bun.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-2 "><p class="order-item-quantity">Qty 1</p></div>
+          <div class="col-12 col-md-2 "><p class="order-item-price">$ 3.99</p></div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-start order-item">
+        <div class="row">
+          <div class="col-12 col-md-2"><img class="order-item-image" src="./images/hot_dog.jpg" /></div>
+          <div class="col-12 col-md-6 ">
+            <p class="order-item-name">Gourmet Hot Dog</p>
+            <div>
+              <p class="order-item-description">
+                A footlong Vienna Beef hot dog, topped with relish, onions, tomatoes, pickle spears, sport peppers,
+                celery salt, and served on a giant, gourmet poppy seed bun.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-2 "><p class="order-item-quantity">Qty 1</p></div>
+          <div class="col-12 col-md-2 "><p class="order-item-price">$ 3.99</p></div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-start order-item">
+        <div class="row">
+          <div class="col-12 col-md-2"><img class="order-item-image" src="./images/hot_dog.jpg" /></div>
+          <div class="col-12 col-md-6 ">
+            <p class="order-item-name">Gourmet Hot Dog</p>
+            <div>
+              <p class="order-item-description">
+                A footlong Vienna Beef hot dog, topped with relish, onions, tomatoes, pickle spears, sport peppers,
+                celery salt, and served on a giant, gourmet poppy seed bun.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-2 "><p class="order-item-quantity">Qty 1</p></div>
+          <div class="col-12 col-md-2 "><p class="order-item-price">$ 3.99</p></div>
+        </div>
+      </div>
+      <!---User Checkout Section-->
+      <section class="checkout-section"></section> 
+      <div class="row">
+          <div class="col-8">
+              <div class="user-checkout">
+                  <h3>Guest Information</h3>
+                  <form class="checkout-form" action="/" method="POST">
+                    <input type="text" name="fname" placeholder="You Name" /><br />
+                    <input type="text" name="lname" type="tel" placeholder="Phone Number"/><br />
+                    <button type="submit" value="Submit"> Place Order</button>
+                  </form>
+                </div>
+          </div>
+          <div class="col-4 price-summary">
+            <article>
+              <h2>Total</h2>
+              <h5 class="price"><span>Sub-Total </span>$10,00</h5>
+              <h6 class="taxes"><span>GST/PST</span> $2,00</h6>
+            <div class="separator"></div>
+            <p class="final-price">$ 12,00</p> </div>
+        </div>
+      </article>
+      </section>
+      <!---End of User Checkout Section-->
+    </div>
+  </body>
 </html>

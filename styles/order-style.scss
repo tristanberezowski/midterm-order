@@ -1,0 +1,147 @@
+$primary-color: #f9f9f9;
+$heading-color: #dd3b3b;
+$paragraph-color: #505050;
+$border-color: #ddd;
+
+body {
+  background-color: $primary-color;
+  color: $paragraph-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $heading-color;
+}
+button {
+  border-radius: 2px;
+}
+
+.container {
+  width: 75%;
+  margin-top: 130px;
+  max-width: 1200px;
+  padding-left: 35px !important;
+  padding-right: 35px !important;
+  padding-bottom: 45px;
+  margin-bottom: 45px;
+  height: auto;
+  background-color: $primary-color;
+  border-radius: 2px;
+  -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.13);
+  -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.13);
+  box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.13);
+}
+
+.order-item {
+  border-bottom: 1px solid $border-color;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+}
+
+.order-heading {
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.order-item-image {
+  max-width: 90%;
+  z-index: 1;
+}
+
+.order-item-name {
+  color: $paragraph-color;
+  font-size: 1.3em;
+  margin-bottom: 10px !important;
+  font-weight: bold;
+}
+.order-item-description {
+  color: $paragraph-color !important;
+}
+
+.order-item-quantity,
+.order-item-price {
+  color: $paragraph-color;
+  text-align: center;
+  font-weight: bold;
+}
+
+.checkout-form {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.user-checkout h3 {
+  width: 75%;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.checkout-form input {
+  border: 1px solid $border-color;
+  height: 45px;
+  margin-bottom: 15px;
+  width: 75%;
+  padding-left: 12px;
+  border-radius: 2px;
+}
+
+.checkout-form button {
+  background-color: $heading-color;
+  padding: 12px 15px 12px 15px;
+  color: $primary-color;
+  width: 75%;
+  border: none;
+}
+
+.price-summary h2 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.price-summary .price {
+  text-align: center;
+  font-size: 1.2em;
+  color: $paragraph-color;
+  padding-top: 12px;
+}
+
+.price-summary span {
+  font-size: 0.7em;
+  position: relative;
+  left: -25px;
+}
+
+.price-summary .taxes {
+  text-align: center;
+  font-size: 1.2em;
+  color: $paragraph-color;
+  padding-top: 12px;
+}
+
+.price-summary .separator {
+  width: 155px;
+  margin-left: 15px;
+  margin-top: 15px;
+  margin-bottom: 12px;
+  border-top: 1px solid rgb(172, 172, 172);
+}
+
+.price-summary .final-price {
+  font-size: 1.8em;
+  color: $paragraph-color;
+  font-weight: bold;
+  text-align: center;
+}
+
+.price-summary article {
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  padding: 30px;
+  width: 75%;
+  background-color: #fff;
+}
