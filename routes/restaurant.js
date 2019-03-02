@@ -37,7 +37,7 @@ module.exports = knex => {
       });
   }
 
-  router.get('/restaurant', (req, res) => {
+  router.get('/', (req, res) => {
     //join tables needed to call order data
     knex.select('*')
       .from('product_orders')
