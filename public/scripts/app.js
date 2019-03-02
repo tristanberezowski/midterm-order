@@ -2,8 +2,9 @@ function infoForCart($element) {
 const name = $(".card-title", $element).text();
 const price = $(".product-price", $element).text();
 const quantity = $(".quantity-input", $element).val();
+const id = $(".product-id", $element).text();
 const totalItem = (Number(quantity) * Number(price));
-return { name: name, price: price, quantity: quantity, total: totalItem };
+return { id: id, name: name, price: price, quantity: quantity, total: totalItem };
 }
 
 const checkQuantity = function($quantityInput) {
@@ -119,9 +120,13 @@ $(() => {
     $.ajax({
       type: "POST",
       url: "/",
-      data:  {cart},
-      async: false
-    });
+      data:  {cart}
+    }).done(result => {
+      window.location.href = `/${result.id}`;
+    }).fail(error => {
+      alert("error posting or inserting to database");
+      console.error(error);
+    })
   });
   
   // Ajax request to create products menu

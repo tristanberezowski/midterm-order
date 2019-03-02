@@ -7,11 +7,11 @@ const router = express.Router();
 module.exports = knex => {
 
   function createProductOrder(orderId, order) {
-    knex('product_orders').insert({
+    return knex('product_orders').insert({
       quantity: order.quantity,
       product_id: order.id,
       order_id: orderId
-    });
+    })//.then( (result) => {console.log("successful insert on", order )})
   }
 
   router.get("/", (req, res) => {
@@ -32,7 +32,6 @@ module.exports = knex => {
   });
 
   router.post("/", (req, res) => {
-    console.log("body", req.body)
     const newOrder = req.body.cart;
     knex("orders")
       .insert({},
@@ -41,13 +40,18 @@ module.exports = knex => {
       .then(idInside => {
         //idInside is an array containing anonymour objects: [anonymous{id:20}]
         let id = idInside[0].id;
-        for (let singleOrder of newOrder) {
-          createProductOrder(id, singleOrder);
-        }
-        res.redirect("/" + id + "/");
+
+        let promises = newOrder.map((singleOrder) => createProductOrder(id, singleOrder));
+        // for (let singleOrder of newOrder) {
+        //   createProductOrder(id, singleOrder);
+        // }
+        return Promise.all(promises).then((results) => id);  //id needs to stay in scope
+        //if all succeed, go to then otherwise it'll bubble down to catch
       })
-      .catch(err => {
-        console.error(err);
+      .then(id => res.status(201).json({id: id}))
+      .catch(errs => {
+        console.error(errs);
+        res.status(500).json({message: "posting failed while trying to insert", errorMessage: errs.message});
       });
   });
 
@@ -55,11 +59,15 @@ module.exports = knex => {
     knex.from('products')
       .innerJoin('product_orders', 'product_orders.product_id', 'products.id')
       .innerJoin('orders', 'orders.id', 'product_orders.order_id')
-      .select("product_orders.quantity", "products.price", "products.name", "description")
+      .select("product_orders.quantity", "products.price", "products.name", "products.img", "description")
       .where('orders.id', req.params.order)
       .asCallback(function (err, rows) {
-        if (err) throw err;
-        res.render("order", rows);
+        if (err) {
+          console.error(err)
+          //return res.render("error", a message or object);
+        }
+        console.log("rows", rows);
+        res.render("order", {rows});
       })
   })
 
