@@ -15,7 +15,7 @@ const authToken = 'c7ddf7090ebf04a597f74545d2f06b76'; // Your Auth Token from ww
 module.exports = knex => {
 
   client.messages.create({
-      body: 'Your food will be ready in pick_up_time',
+      body: 'Your food will be ready in pick_up_time minutes check syntax',
       to: 'GUEST.PHONE', // PHONE NUMBER PROVIDED BY DB, can use function?
       from: '+16042393009' // this is our Twilio server number
     })
@@ -67,18 +67,18 @@ module.exports = knex => {
         addPickup();
         addPending();
         client.messages.create();
-        //can update /:order with order acceptance from here on out
+        //can update /:order page with order acceptance from here on out
       })
 
       .catch((err) => {
         console.log('query obj DNE', err);
       });
 
-    res.redirect('/restaurant');
+    res.redirect('/restaurant'); //alternatively, async update the page by looping
+    //back to on.event button
 
-    //alternatively, async update the page by looping back to on.event button
-    //to adjust the /:restaurant_form_field
-    //send a response in the form of JSON to restaurant_button.js
+    //ie. send a response in the form of JSON to restaurant_button.js
+    //to ie. adjust the /:restaurant_form_field
 
   });
 

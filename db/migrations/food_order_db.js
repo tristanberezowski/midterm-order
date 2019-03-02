@@ -41,6 +41,4 @@ exports.down = function (knex, Promise) {
     knex.raw('DROP TABLE orders CASCADE'),
 
   ])
-
-
 };
