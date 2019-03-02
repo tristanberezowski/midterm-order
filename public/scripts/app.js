@@ -91,13 +91,14 @@ $(() => {
           .prev()
           .text(cart[exists].quantity);
         cart[exists].total += cartItem.quantity * cartItem.price;
-        $(`.item-name:contains(${cartItem.name}) ~ .item-price`).text(cart[exists].total);
+        $(`.item-name:contains(${cartItem.name}) ~ .item-price`).text(cart[exists].total.toFixed(2));
         cartTotal(cart);
       } else {
         addToCart(cartItem);
         cart.push(cartItem);
         cartTotal(cart);
       }
+      $parent.children(".quantity-input").val("0");
     }
   });
 
