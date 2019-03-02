@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/restaurant_style.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -14,5 +15,28 @@
   <body>
     <header><% include ./partials/_header %></header>
     <h1>Restaurant Orders</h1>
+    <!--Accordions wrapper-->
+    <div class="accordion">
+      <div class="accordion-header">Order #344</div>
+      <div class="accordion-content">
+        <div class="d-flex justify-content-start order-item">
+          <div class="row">
+            <div class="col-12 col-md-2"><img class="order-item-image" src="./images/hot_dog.jpg" /></div>
+            <div class="col-12 col-md-6 ">
+              <p class="order-item-name">Gourmet Hot Dog</p>
+              <div>
+                <p class="order-item-description">
+                  A footlong Vienna Beef hot dog, topped with relish, onions, tomatoes, pickle spears, sport peppers,
+                  celery salt, and served on a giant, gourmet poppy seed bun.
+                </p>
+              </div>
+            </div>
+            <div class="col-12 col-md-2 "><p class="order-item-quantity">Qty 1</p></div>
+            <div class="col-12 col-md-2 "><p class="order-item-price">$ 3.99</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End of accordions wrapper-->
   </body>
 </html>

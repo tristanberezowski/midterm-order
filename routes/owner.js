@@ -1,15 +1,12 @@
 "use strict";
 
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 
-module.exports = function(){
-  
+module.exports = function() {
   router.get("/", (req, res) => {
-    if (req.session.owner)
-      res.render('restaurant');
-    else
-      res.render("index");
+    if (req.session.owner) res.render("restaurant");
+    else res.render("index");
   });
   return router;
-} //post for owner is in app.js
+}; //post for owner is in app.js
