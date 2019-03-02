@@ -1,13 +1,13 @@
 "use strict";
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
-module.exports = function(){
-  
+module.exports = function () {
+
   router.get("/", (req, res) => {
     if (req.session.owner)
-      res.render('restaurant');
+      res.render('restaurant'); //MAYBE REDIRECT
     else
       res.render("index");
   });
