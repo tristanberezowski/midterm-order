@@ -3,9 +3,9 @@
 const express = require("express");
 const router = express.Router();
 const twilio = require('twilio');
-const client = new twilio(accountSid, authToken);
 const accountSid = 'AC00a4b43fa33d38e988101427f710d8ee'; // Your Account SID from www.twilio.com/console
 const authToken = 'c7ddf7090ebf04a597f74545d2f06b76'; // Your Auth Token from www.twilio.com/console
+const client = new twilio(accountSid, authToken);
 //CHECK ALL VARIBLES, QUERIES, AND ROUTE NAMES
 //CHECK ALL VARIBLES, QUERIES, AND ROUTE NAMES
 //CHECK ALL VARIBLES, QUERIES, AND ROUTE NAMES
