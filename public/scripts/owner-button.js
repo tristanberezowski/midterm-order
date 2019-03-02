@@ -1,10 +1,21 @@
-/* owner page, on submit event, inserts field value as an update to
-existing row in orders */
 const express = require("express");
 const router = express.Router();
+
+const twilio = require('twilio');
+var accountSid = 'AC00a4b43fa33d38e988101427f710d8ee'; // Your Account SID from www.twilio.com/console
+var authToken = 'c7ddf7090ebf04a597f74545d2f06b76'; // Your Auth Token from www.twilio.com/console
+var client = new twilio(accountSid, authToken);
+
 module.exports = knex => {
 
   //CHECK ALL VARIBLES, QUERIES, AND ROUTE NAMES
+
+  client.messages.create({
+      body: 'You have a food order',
+      to: 'GUEST.PHONE', // Text this number
+      from: '+16042393009' // this is a valid Twilio number
+    })
+    .then((message) => console.log(message.sid));
 
   function addPickup() {
     knex('orders')
