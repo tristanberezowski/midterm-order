@@ -5,7 +5,6 @@ $(document).ready(function() {
       alert("Please add at least 1 item.");
     } else {
       addToCart(cartItem);
-      cartTotal();
     }
   };
   // Event listener to add items to cart
@@ -18,17 +17,10 @@ $(document).ready(function() {
   // Event listener to remove items from cart
   $("#side-bar").on("click", ".remove-btn", function() {
     const $parent = $(this).parent();
-    $parent.remove();
+    // $parent.remove();
+    console.log($parent.find(".item-name").text());
   });
-  // Checks if cart is empty or not
-  function cartTotal() {
-    if ($("#side-bar").has(".cart-item").length) {
-      console.log("Cart has Item");
-    } else {
-      console.log("Cart is Empty");
-    }
-  }
-  cartTotal();
+
   // Creates restaurant menu
   const createProductMenu = function(product) {
     //returns jquery object
@@ -47,7 +39,7 @@ $(document).ready(function() {
         <div class="decrease quantity-btn" onclick="decreaseValue()" value="Decrease Value">
           <span>-</span>
         </div>
-        <input type="number" class="quantity-input" value="0" min="1" step="1" />
+        <input type="number" class="quantity-input" value="0" min="0" step="1" />
         <div class="increase quantity-btn" onclick="increaseValue()" value="Increase Value">
           <span>+</span>
         </div>
