@@ -1,18 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Client Checkout</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<head>
+  <title>Client Checkout</title>
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-  </head>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-  <body>
-    <header><% include ./partials/_header %></header>
-    <h1>Client Checkout Page</h1>
-  </body>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+</head>
+
+<body>
+  <header>
+    <% include ./partials/_header %>
+  </header>
+  <div class="container">
+
+    <h1>Your orders</h1>
+    <p>
+      <span class='name'>guest.name</span> <span class='phone'>guest.phone</span>
+
+      <ul>
+        <li class='product1'><span> class=product.img x quantity</span>
+          <span>product.name</span>
+          <span>product.price</span>
+        </li>
+        <li>etc</li>
+        <li>etc</li>
+      </ul>
+      <span class='b4Taxes'>sum(product.price)</span>
+      <span class='taxes'>+ sum(0.12)</span>
+      <span class='afterTaxes'>sum(1.12)</span>
+    </p>
+
+  </div>
+  <input type='submit' class='cancelButton'>
+
+</body>
+
 </html>
