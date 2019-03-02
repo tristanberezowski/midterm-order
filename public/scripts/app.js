@@ -1,9 +1,10 @@
 function infoForCart($element) {
-  const name = $(".card-title", $element).text();
-  const price = $(".product-price", $element).text();
-  const quantity = $(".quantity-input", $element).val();
-  const totalItem = Number(quantity) * Number(price);
-  return { name: name, price: price, quantity: quantity, total: totalItem };
+const name = $(".card-title", $element).text();
+const price = $(".product-price", $element).text();
+const quantity = $(".quantity-input", $element).val();
+const id = $(".product-id", $element).text();
+const totalItem = (Number(quantity) * Number(price));
+return { id: id, name: name, price: price, quantity: quantity, total: totalItem };
 }
 
 const checkQuantity = function($quantityInput) {
@@ -27,6 +28,7 @@ const createProductMenu = function(product) {
     <div class="row">
       <div class="col-12 col-md-8"><h5 class="card-title">${product.name}</h5></div>
       <div class="col-12 col-md-4"><h6 class="product-price">${product.price}</h6></div>
+      <div class="product-id">${product.id}</div>
     </div>
     <p class="card-text">
       ${product.description}
@@ -112,6 +114,21 @@ $(() => {
     cartTotal(cart);
   });
 
+  //Checkout button doing post request
+  $(".checkout-btn").on("click", (event) => {
+    event.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "/",
+      data:  {cart}
+    }).done(result => {
+      window.location.href = `/${result.id}`;
+    }).fail(error => {
+      alert("error posting or inserting to database");
+      console.error(error);
+    })
+  });
+  
   // Ajax request to create products menu
   $(() => {
     $.ajax({
