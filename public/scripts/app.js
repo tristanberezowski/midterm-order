@@ -1,10 +1,10 @@
 function infoForCart($element) {
-const name = $(".card-title", $element).text();
-const price = $(".product-price", $element).text();
-const quantity = $(".quantity-input", $element).val();
-const id = $(".product-id", $element).text();
-const totalItem = (Number(quantity) * Number(price));
-return { id: id, name: name, price: price, quantity: quantity, total: totalItem };
+  const name = $(".card-title", $element).text();
+  const price = $(".product-price", $element).text();
+  const quantity = $(".quantity-input", $element).val();
+  const id = $(".product-id", $element).text();
+  const totalItem = Number(quantity) * Number(price);
+  return { id: id, name: name, price: price, quantity: quantity, total: totalItem };
 }
 
 const checkQuantity = function($quantityInput) {
@@ -75,6 +75,28 @@ function addToCart(item) {
   return $("#side-bar").append(cartItem);
 }
 
+// Creates html structure for order items
+function addToOrder(item) {
+  let orderItem = `
+  <div class="d-flex justify-content-start order-item">
+  <div class="row">
+    <div class="col-12 col-md-2"><img class="order-item-image" src="./images/hot_dog.jpg" /></div>
+    <div class="col-12 col-md-6 ">
+      <p class="order-item-name">Gourmet Hot Dog</p>
+      <div>
+        <p class="order-item-description">
+          A footlong Vienna Beef hot dog, topped with relish, onions, tomatoes, pickle spears, sport peppers,
+          celery salt, and served on a giant, gourmet poppy seed bun.
+        </p>
+      </div>
+    </div>
+    <div class="col-12 col-md-2 "><p class="order-item-quantity">Qty 1</p></div>
+    <div class="col-12 col-md-2 "><p class="order-item-price">$ 3.99</p></div>
+  </div>
+  </div>`;
+  return $("#order-container").append(orderItem);
+}
+
 $(() => {
   const cart = [];
 
@@ -115,20 +137,22 @@ $(() => {
   });
 
   //Checkout button doing post request
-  $(".checkout-btn").on("click", (event) => {
+  $(".checkout-btn").on("click", event => {
     event.preventDefault();
     $.ajax({
       type: "POST",
       url: "/",
-      data:  {cart}
-    }).done(result => {
-      window.location.href = `/${result.id}`;
-    }).fail(error => {
-      alert("error posting or inserting to database");
-      console.error(error);
+      data: { cart }
     })
+      .done(result => {
+        window.location.href = `/${result.id}`;
+      })
+      .fail(error => {
+        alert("error posting or inserting to database");
+        console.error(error);
+      });
   });
-  
+
   // Ajax request to create products menu
   $(() => {
     $.ajax({
