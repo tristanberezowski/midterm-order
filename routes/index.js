@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 
+
 module.exports = knex => {
 
   function createProductOrder(orderId, order) {
@@ -31,7 +32,8 @@ module.exports = knex => {
   });
 
   router.post("/", (req, res) => {
-    const newOrder = req.body.order; //for json testing, change to req.body
+    console.log("body", req.body)
+    const newOrder = req.body.cart;
     knex("orders")
       .insert({},
         ["id"] //this will give idInside as the return value to this promise
@@ -53,8 +55,7 @@ module.exports = knex => {
     knex.from('products')
       .innerJoin('product_orders', 'product_orders.product_id', 'products.id')
       .innerJoin('orders', 'orders.id', 'product_orders.order_id')
-      .innerJoin('guests', 'guests.order_id', 'orders.id')
-      .select("guests.name", "guests.phone", "product_orders.quantity", "products.price", "products.name", "description")
+      .select("product_orders.quantity", "products.price", "products.name", "description")
       .where('orders.id', req.params.order)
       .asCallback(function (err, rows) {
         if (err) throw err;

@@ -27,6 +27,7 @@ let menuHtml = `
     <div class="row">
       <div class="col-12 col-md-8"><h5 class="card-title">${product.name}</h5></div>
       <div class="col-12 col-md-4"><h6 class="product-price">${product.price}</h6></div>
+      <div class="product-id">${product.id}</div>
     </div>
     <p class="card-text">
       ${product.description}
@@ -112,6 +113,17 @@ $(() => {
     cartTotal(cart);
   });
 
+  //Checkout button doing post request
+  $(".checkout-btn").on("click", (event) => {
+    event.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "/",
+      data:  {cart},
+      async: false
+    });
+  });
+  
   // Ajax request to create products menu
   $(() => {
     $.ajax({
