@@ -50,7 +50,7 @@ module.exports = knex => {
         let templateVars = {
           product_orders
         };
-        res.render("owners", templateVars);
+        res.render("restaurant", templateVars);
       })
       .catch(err => {
         console.error("not able to retrieve from database");
