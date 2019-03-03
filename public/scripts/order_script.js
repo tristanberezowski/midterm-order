@@ -21,6 +21,8 @@ $(() => {
     return $element
   }
   // ----------------------
+
+  //submit user data and display order confirmed asynchronously
   $(".checkout-form").submit(function(event) {
     event.preventDefault();
     let guestInfo = $(".checkout-form").serialize;
@@ -34,4 +36,6 @@ $(() => {
       console.error("error posting in front end");
     })
   });
+
+  
 });
