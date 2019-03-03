@@ -44,4 +44,12 @@ function addItemsToOrder() {
 $(() => {
   addOrderToRestaurant();
   addItemsToOrder();
+
+  // Accordion functionality for orders
+  $(".accordion").on("click", ".accordion-header", function() {
+    $(this)
+      .toggleClass("active")
+      .next()
+      .slideToggle();
+  });
 });
