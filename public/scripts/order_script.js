@@ -25,17 +25,14 @@ $(() => {
   //submit user data and display order confirmed asynchronously
   $(".checkout-form").submit(function(event) {
     event.preventDefault();
-    let guestInfo = $(".checkout-form").serialize;
-    $.ajax({
-      type: "POST",
-      url: "/orders",
-      data: guestInfo
-    }).done(result => {
-      $("#order-confirmation").css("opacity", 1); //must be changed to 0 later
+    let guestInfo = $(".checkout-form").serialize() + `&order_id=${window.location.pathname.replace("/orders/","")}`;
+    console.log(guestInfo);
+    $.post("/orders", guestInfo).done(() => {
+      $("#order-confirmation").css("opacity","1")
+      $(".checkout-form button").attr("disabled", true);
+      console.log("order placed")
     }).fail(err => {
       console.error("error posting in front end");
     })
   });
-
-  
 });

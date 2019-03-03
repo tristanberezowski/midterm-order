@@ -15,9 +15,21 @@ module.exports = knex => {
           console.error("error in get /:order =>", err);
           //return res.render("error", a message or object);
         }
-        console.log("ROWS ARE:", rows);
+        //console.log("ROWS ARE:", rows);
         res.render("order", {orders: rows});
       })
+  })
+
+  router.post("/", (req, res) => {
+    console.log(req.body)
+    knex("guests")
+    .insert({
+      name: req.body.fname,
+      phone: req.body.lname,
+      order_id: Number(req.body.order_id)
+    })
+    .then((result) => res.status(202).end())
+    .catch((err) => console.error("issue with inserting user data"));
   })
 
   return router;
