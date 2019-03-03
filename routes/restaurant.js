@@ -13,7 +13,6 @@ const client = new twilio(accountSid, authToken);
 //CHECK ALL VARIBLES, QUERIES, AND ROUTE NAMES
 //CHECK ALL VARIBLES, QUERIES, AND ROUTE NAMES
 module.exports = knex => {
-<<<<<<< HEAD
 
   client.messages.create({
       body: 'Your food will be ready in pick_up_time minutes check syntax',
@@ -39,9 +38,6 @@ module.exports = knex => {
   }
 
   router.get('/restaurant', (req, res) => {
-=======
-  router.get("/owner", (req, res) => {
->>>>>>> 6b9da7d9336f4f66b753e3d679023f2371d0e93d
     //join tables needed to call order data
     knex
       .select("*")
@@ -58,7 +54,6 @@ module.exports = knex => {
       })
       .catch(err => {
         throw err;
-<<<<<<< HEAD
       })
   });
 
@@ -82,11 +77,8 @@ module.exports = knex => {
     //back to on.event button
 
     //ie. send a response in the form of JSON to restaurant_button.js
-    //to ie. adjust the /:restaurant_form_field
+    //to ie. adjust the confirm order button
 
-=======
-      });
->>>>>>> 6b9da7d9336f4f66b753e3d679023f2371d0e93d
   });
 };
 
