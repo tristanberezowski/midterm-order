@@ -21,7 +21,7 @@ const checkQuantity = function($quantityInput) {
 const createProductMenu = function(product) {
   //returns jquery object
   let menuHtml = `
-<article class="p-2">
+<article class="col-sm">
 <div class="card">
   <img class="card-img-top" src="${product.img}"/>
   <div class="card-body">
@@ -30,13 +30,13 @@ const createProductMenu = function(product) {
       <div class="col-12 col-md-4"><h6 class="product-price">${product.price}</h6></div>
       <div class="product-id">${product.id}</div>
     </div>
-    <p class="card-text">
+    <p class="card-text product-descritpion">
       ${product.description}
     </p>
     <div class="decrease quantity-btn" value="Decrease Value">
       <span>-</span>
     </div>
-    <input type="number" class="quantity-input" value="0" min="1" step="1" />
+    <input type="number" class="quantity-input" value="0" min="0" step="1" />
     <div class="increase quantity-btn" value="Increase Value">
       <span>+</span>
     </div>
@@ -106,6 +106,19 @@ $(".accordion").on("click", ".accordion-header", function() {
 
 $(() => {
   const cart = [];
+
+  const $cartQty = 0;
+
+  function cartInfo() {
+    if (cart.length === 0) {
+      return $cartQty;
+    } else {
+      $cartQty = cart.length;
+      return $cartQty;
+    }
+  }
+  cartInfo();
+
   // Event listener for increasing and decreasing buttons
   $("#product-container").on("click", ".increase", function() {
     const $parent = $(this).parent();

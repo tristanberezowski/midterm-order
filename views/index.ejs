@@ -14,17 +14,33 @@
 
   <body>
     <header><% include ./partials/_header %></header>
-    <section id="side-bar">
+    <!--Sidebar-->
+    <section id="side-bar" style="z-index:10;">
       <article class="side-bar-head">
+        <a class="close-side-bar" href="javascript:void(0)" onclick="closeNav()">X</a>
         <h4>Foody - Your Order</h4>
         <h5 class="total">Total: $0.00</h5>
         <h6></h6>
         <button class="checkout-btn">Checkout</button>
       </article>
     </section>
-
+    <!--End of sidebar-->
     <h1 class="main-heading">Menu</h1>
+    <!--Product Menu-->
+    <section id="container" class="container">
+      <div id="product-container" class="row"></div>
+    </section>
+    <!--End of product Menu-->
+    <script>
+      function openNav() {
+        document.getElementById("side-bar").style.width = "335px";
+        document.body.style.marginRight = "335px";
+      }
 
-    <section id="product-container" class="d-flex flex-wrap justify-content-center"></section>
+      function closeNav() {
+        document.getElementById("side-bar").style.width = "0";
+        document.body.style.marginRight = "0px";
+      }
+    </script>
   </body>
 </html>

@@ -4,18 +4,30 @@ $paragraph-color: #505050;
 
 #side-bar {
   position: fixed;
+  transition: 0.3s;
+  overflow-x: hidden;
   top: 85px;
   right: 0;
-  width: 335px;
+  width: 0px;
   height: 100%;
   background-color: #f7f7f7;
-  border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
+  border-top: 1px solid #eaeaea;
+  border-left: 1px solid #eaeaea;
   color: $paragraph-color;
+  -webkit-box-shadow: -2px 4px 8px 0px rgba(0, 0, 0, 0.09);
+  -moz-box-shadow: -2px 4px 8px 0px rgba(0, 0, 0, 0.09);
+  box-shadow: -2px 4px 8px 0px rgba(0, 0, 0, 0.09);
 }
 
 .side-bar-head {
   padding-bottom: 70px;
+}
+
+.close-side-bar {
+  font-weight: bold;
+  background-color: $heading-color !important;
+  padding: 8px;
+  color: $primary-color !important;
 }
 
 .checkout-btn {
