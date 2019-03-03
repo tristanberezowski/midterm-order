@@ -33,11 +33,11 @@ const createProductMenu = function(product) {
     <p class="card-text">
       ${product.description}
     </p>
-    <div class="decrease quantity-btn" onclick="decreaseValue()" value="Decrease Value">
+    <div class="decrease quantity-btn" value="Decrease Value">
       <span>-</span>
     </div>
     <input type="number" class="quantity-input" value="0" min="1" step="1" />
-    <div class="increase quantity-btn" onclick="increaseValue()" value="Increase Value">
+    <div class="increase quantity-btn" value="Increase Value">
       <span>+</span>
     </div>
     </br>
@@ -96,9 +96,35 @@ function addToOrder(item) {
   </div>`;
   return $("#order-container").append(orderItem);
 }
+// Accordion functionality (Restaurant page)
+$(".accordion").on("click", ".accordion-header", function() {
+  $(this)
+    .toggleClass("active")
+    .next()
+    .slideToggle();
+});
 
 $(() => {
   const cart = [];
+  // Event listener for increasing and decreasing buttons
+  $("#product-container").on("click", ".increase", function() {
+    const $parent = $(this).parent();
+    const currentVal = parseInt($parent.children(".quantity-input").val());
+    const newValue = parseInt(currentVal) + 1;
+    $parent.children(".quantity-input").val(newValue);
+  });
+
+  // Event listener for decreasing and decreasing buttons
+  $("#product-container").on("click", ".decrease", function() {
+    const $parent = $(this).parent();
+    const currentVal = Number($parent.children(".quantity-input").val());
+    const newValue = parseInt(currentVal) - 1;
+    if (currentVal === 0) {
+      newVal = 0;
+    } else {
+      $parent.children(".quantity-input").val(newValue);
+    }
+  });
 
   // Event listener to add items to cart
   $("#product-container").on("click", ".add-to-cart-btn", function() {
