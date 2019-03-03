@@ -13,7 +13,7 @@ const client = new twilio(accountSid, authToken);
 //CHECK ALL VARIBLES, QUERIES, AND ROUTE NAMES
 //CHECK ALL VARIBLES, QUERIES, AND ROUTE NAMES
 module.exports = knex => {
-  router.get("/owner", (req, res) => {
+  router.get("/", (req, res) => {
     //join tables needed to call order data
     knex
       .from('product_orders')
@@ -26,7 +26,7 @@ module.exports = knex => {
         let templateVars = {
           product_orders
         };
-        res.render("owners", templateVars);
+        res.render("restaurant", templateVars);
       })
       .catch(err => {
         console.error("not able to retrieve from database");
