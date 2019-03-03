@@ -14,48 +14,40 @@ const client = new twilio(accountSid, authToken);
 //CHECK ALL VARIBLES, QUERIES, AND ROUTE NAMES
 module.exports = knex => {
 
-  client.messages.create({
-      body: 'Your food will be ready in pick_up_time minutes check syntax',
-      to: 'GUEST.PHONE', // PHONE NUMBER PROVIDED BY DB, can use function?
-      from: '+16042393009' // this is our Twilio server number
-    })
-    .then((message) => console.log(message.sid));
+  // client.messages.create({
+  //     body: 'Your food will be ready in pick_up_time minutes check syntax',
+  //     to: 'GUEST.PHONE', // PHONE NUMBER PROVIDED BY DB, can use function?
+  //     from: '+16042393009' // this is our Twilio server number
+  //   })
+  //   .then((message) => console.log(message.sid));
 
-  function addPickup() {
-    knex('orders')
-      .where('ID FOR THIS PARTICULAR ORDER')
-      .update({
-        pick_up_time: 'form_field_input'
-      });
-  }
+  // function addPickup() {
+  //   knex('orders')
+  //     .where('ID FOR THIS PARTICULAR ORDER')
+  //     .update({
+  //       pick_up_time: 'form_field_input'
+  //     });
+  // }
 
-  function addPending() {
-    knex('orders')
-      .where('ID FOR THIS PARTICULAR ORDER')
-      .update({
-        pending: true
-      });
-  }
+  // function addPending() {
+  //   knex('orders')
+  //     .where('ID FOR THIS PARTICULAR ORDER')
+  //     .update({
+  //       pending: true
+  //     });
+  // }
 
-  router.get('/restaurant', (req, res) => {
+  router.get('/', (req, res) => {
     //join tables needed to call order data
-    knex
-      .from('product_orders')
-      .join('orders', 'order_id', 'orders.id')
-      .join('products', 'product_id', 'products.id')
-      .where('pick_up_time', '=', '0')
-      .orWhere('pending', '=', 'true')
-      .select('*')
-      .then(product_orders => {
-        let templateVars = {
-          product_orders
-        };
-        res.render("restaurant", templateVars);
-      })
-      .catch(err => {
-        console.error("not able to retrieve from database");
-        throw err;
-      })
+    knex.from('products')
+    .innerJoin('product_orders', 'product_orders.product_id', 'products.id')
+    .innerJoin('orders', 'orders.id', 'product_orders.order_id')
+    .select("*")
+    .then(rows => {
+      console.log("rows are", rows)
+      res.render("restaurant", {rows});
+    })
+    .catch(err => console.error("not able to retrieve from database"))
   });
 
   //THE REQ IS FROM THE SUBMIT BUTTON EVENT
@@ -67,6 +59,7 @@ module.exports = knex => {
         addPickup();
         addPending();
         client.messages.create();
+        res.redirect('/restaurant');
         //can update /:order page with order acceptance from here on out
       })
 
@@ -74,14 +67,12 @@ module.exports = knex => {
         console.log('query obj DNE', err);
       });
 
-    res.redirect('/restaurant'); //alternatively, async update the page by looping
+    //alternatively, async update the page by looping
     //back to on.event button
 
     //ie. send a response in the form of JSON to restaurant_button.js
     //to ie. adjust the confirm order button
-
   });
-
   return router;
 };
 

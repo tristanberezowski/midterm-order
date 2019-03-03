@@ -40,7 +40,6 @@ module.exports = knex => {
       .then(idInside => {
         //idInside is an array containing anonymour objects: [anonymous{id:20}]
         let id = idInside[0].id;
-
         let promises = newOrder.map((singleOrder) => createProductOrder(id, singleOrder));
         // for (let singleOrder of newOrder) {  //these are unneeded because of line above
         //   createProductOrder(id, singleOrder);

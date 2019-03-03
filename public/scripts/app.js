@@ -178,6 +178,7 @@ $(() => {
   //Checkout button doing post request
   $(".checkout-btn").on("click", event => {
     event.preventDefault();
+    console.log(cart);
     $.ajax({
       type: "POST",
       url: "/",
