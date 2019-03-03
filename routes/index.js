@@ -42,7 +42,7 @@ module.exports = knex => {
         let id = idInside[0].id;
 
         let promises = newOrder.map((singleOrder) => createProductOrder(id, singleOrder));
-        // for (let singleOrder of newOrder) {
+        // for (let singleOrder of newOrder) {  //these are unneeded because of line above
         //   createProductOrder(id, singleOrder);
         // }
         return Promise.all(promises).then((results) => id);  //id needs to stay in scope
