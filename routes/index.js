@@ -11,7 +11,7 @@ module.exports = knex => {
       quantity: order.quantity,
       product_id: order.id,
       order_id: orderId
-    })//.then( (result) => {console.log("successful insert on", order )})
+    }) //.then( (result) => {console.log("successful insert on", order )})
   }
 
   router.get("/", (req, res) => {
@@ -44,13 +44,18 @@ module.exports = knex => {
         // for (let singleOrder of newOrder) {  //these are unneeded because of line above
         //   createProductOrder(id, singleOrder);
         // }
-        return Promise.all(promises).then((results) => id);  //id needs to stay in scope
+        return Promise.all(promises).then((results) => id); //id needs to stay in scope
         //if all succeed, go to then otherwise it'll bubble down to catch
       })
-      .then(id => res.status(201).json({id: id}))
+      .then(id => res.status(201).json({
+        id: id
+      }))
       .catch(errs => {
         console.error(errs);
-        res.status(500).json({message: "posting failed while trying to insert", errorMessage: errs.message});
+        res.status(500).json({
+          message: "posting failed while trying to insert",
+          errorMessage: errs.message
+        });
       });
   });
 
@@ -66,7 +71,9 @@ module.exports = knex => {
           //return res.render("error", a message or object);
         }
         console.log("rows", rows);
-        res.render("order", {rows});
+        res.render("order", {
+          rows
+        });
       })
   })
 
