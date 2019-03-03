@@ -7,7 +7,7 @@ function infoForCart($element) {
   return { id: id, name: name, price: price, quantity: quantity, total: totalItem };
 }
 
-const checkQuantity = function($quantityInput) {
+function checkQuantity($quantityInput) {
   // Check if quantity is at least 1
   if (Number($quantityInput.val()) < 1) {
     alert("Please add at least 1 item.");
@@ -96,15 +96,11 @@ function addToOrder(item) {
   </div>`;
   return $("#order-container").append(orderItem);
 }
-// Accordion functionality (Restaurant page)
-$(".accordion").on("click", ".accordion-header", function() {
-  $(this)
-    .toggleClass("active")
-    .next()
-    .slideToggle();
-});
 
 $(() => {
+  if(window.location.pathname !== "/") //app.js will still load after redirect
+    exit();
+  
   const cart = [];
 
   const $cartQty = 0;
@@ -118,6 +114,14 @@ $(() => {
     }
   }
   cartInfo();
+
+    // Accordion functionality (Restaurant page)
+  $(".accordion").on("click", ".accordion-header", function() {
+    $(this)
+      .toggleClass("active")
+      .next()
+      .slideToggle();
+  });
 
   // Event listener for increasing and decreasing buttons
   $("#product-container").on("click", ".increase", function() {
@@ -175,8 +179,23 @@ $(() => {
     cartTotal(cart);
   });
 
+  // Ajax request to create products menu
+  $.ajax({
+    method: "GET",
+    url: "/api/products"
+  }).done(products => {
+    for (product of products) {
+      createProductMenu(product).appendTo("#product-container");
+    }
+  }).fail(error => {
+    console.error("error loading products");
+  });
+  //closes JQuery function
+
+//moved to page
+
   //Checkout button doing post request
-  $(".checkout-btn").on("click", event => {
+  $("#side-bar .checkout-btn").on("click", event => {
     event.preventDefault();
     console.log(cart);
     $.ajax({
@@ -185,24 +204,12 @@ $(() => {
       data: { cart }
     })
       .done(result => {
-        window.location.href = `/${result.id}`;
+        window.location.href = `/orders/${result.id}`;
       })
       .fail(error => {
         alert("error posting or inserting to database");
         console.error(error);
       });
   });
-
-  // Ajax request to create products menu
-  $(() => {
-    $.ajax({
-      method: "GET",
-      url: "/api/products"
-    }).done(products => {
-      for (product of products) {
-        createProductMenu(product).appendTo("#product-container");
-      }
-    });
-  });
-  //closes JQuery function
+  return;
 });

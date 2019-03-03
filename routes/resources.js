@@ -14,5 +14,12 @@ module.exports = (knex) => {
     });
   });
 
+  router.get("/order", (req, res) => {
+    console.log(req.body)
+    // knex
+    //   .select("*")
+    //   .from()
+  })
+
   return router;
 }
