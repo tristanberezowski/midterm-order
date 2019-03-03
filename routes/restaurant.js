@@ -40,12 +40,12 @@ module.exports = knex => {
   router.get('/restaurant', (req, res) => {
     //join tables needed to call order data
     knex
-      .select("*")
-      .from("product_orders")
-      .join("orders", "orders_id", "orders.id")
-      .join("products", "product_id", "products.id")
-      .where(!"pick_up_time")
-      //pass data to ejs to print
+      .from('product_orders')
+      .join('orders', 'order_id', 'orders.id')
+      .join('products', 'product_id', 'products.id')
+      .where('pick_up_time', '=', '0')
+      .orWhere('pending', '=', 'true')
+      .select('*')
       .then(product_orders => {
         let templateVars = {
           product_orders
@@ -53,6 +53,7 @@ module.exports = knex => {
         res.render("owners", templateVars);
       })
       .catch(err => {
+        console.error("not able to retrieve from database");
         throw err;
       })
   });
@@ -80,6 +81,8 @@ module.exports = knex => {
     //to ie. adjust the confirm order button
 
   });
+
+  return router;
 };
 
 //CHECK ALL VARIBLES, QUERIES, AND ROUTE NAMES

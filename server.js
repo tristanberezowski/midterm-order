@@ -43,7 +43,7 @@ app.use(express.static("public"));
 app.use("/api", resourceRoutes(knex));
 
 // Mount all other routes
-//app.use("/restaurant", restaurantRoutes(knex));
+app.use("/restaurant", restaurantRoutes(knex));
 app.use("/", indexRoutes(knex));
 
 
