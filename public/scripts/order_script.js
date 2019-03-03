@@ -21,5 +21,17 @@ $(() => {
     return $element
   }
   // ----------------------
-  //$(".checkout-form").on("click", )
+  $(".checkout-form").submit(function(event) {
+    event.preventDefault();
+    let guestInfo = $(".checkout-form").serialize;
+    $.ajax({
+      type: "POST",
+      url: "/orders",
+      data: guestInfo
+    }).done(result => {
+      $("#order-confirmation").css("opacity", 1); //must be changed to 0 later
+    }).fail(err => {
+      console.error("error posting in front end");
+    })
+  });
 });

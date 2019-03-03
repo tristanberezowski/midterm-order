@@ -202,6 +202,8 @@ $(() => {
       for (product of products) {
         createProductMenu(product).appendTo("#product-container");
       }
+    }).fail(error => {
+      console.error("error loading products");
     });
   });
   //closes JQuery function
