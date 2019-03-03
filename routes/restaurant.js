@@ -74,10 +74,9 @@ module.exports = knex => {
         console.log('query obj DNE', err);
       });
 
-
-
     res.redirect('/restaurant'); //alternatively, async update the page by looping
     //back to on.event button
+
     //ie. send a response in the form of JSON to restaurant_button.js
     //to ie. adjust the confirm order button
 
