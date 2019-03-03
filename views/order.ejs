@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/styles/order-style.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/owner_script.js"></script>
   </head>
 
   <body>
@@ -67,27 +66,30 @@
         </div>
       </div>
       <!---User Checkout Section-->
-      <section class="checkout-section"></section> 
-      <div class="row">
-          <div class="col-8">
+      <section class="checkout-section container">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm price-summary">
+              <article>
+                <h2>Total</h2>
+                <h5 class="price"><span>Sub-Total </span>$10,00</h5>
+                <h6 class="taxes"><span>GST/PST</span> $2,00</h6>
+                <div class="separator"></div>
+                <p class="final-price">$ 12,00</p>
+              </article>
+            </div>
+            <div class="col-sm">
               <div class="user-checkout">
-                  <h3>Guest Information</h3>
-                  <form class="checkout-form">
-                    <input type="text" name="fname" placeholder="You Name" /><br />
-                    <input type="text" name="lname" type="tel" placeholder="Phone Number"/><br />
-                    <button type="submit" value="Submit"> Place Order</button>
-                  </form>
-                </div>
+                <h3>Guest Information</h3>
+                <form class="checkout-form">
+                  <input type="text" name="fname" placeholder="You Name" /><br />
+                  <input type="text" name="lname" type="tel" placeholder="Phone Number" /><br />
+                  <button type="submit" value="Submit">Place Order</button>
+                </form>
+              </div>
+            </div>
           </div>
-          <div class="col-4 price-summary">
-            <article>
-              <h2>Total</h2>
-              <h5 class="price"><span>Sub-Total </span>$10,00</h5>
-              <h6 class="taxes"><span>GST/PST</span> $2,00</h6>
-            <div class="separator"></div>
-            <p class="final-price">$ 12,00</p> </div>
         </div>
-      </article>
       </section>
       <!---End of User Checkout Section-->
     </div>
