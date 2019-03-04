@@ -82,16 +82,6 @@ $(() => {
 
   const cart = [];
 
-  // Function updates cart button with qty of items in it
-  function updateCartBtn() {
-    if (cart.length === 1) {
-      $(".admin-btn > span").text(" - " + cart.length + " item");
-    } else {
-      $(".admin-btn > span").text(" - " + cart.length + " items");
-    }
-  }
-  updateCartBtn();
-
   // Accordion functionality (Restaurant page)
   $(".accordion").on("click", ".accordion-header", function() {
     $(this)
@@ -142,8 +132,25 @@ $(() => {
         cart.push(cartItem);
         cartTotal(cart);
       }
-      updateCartBtn();
+
       $parent.children(".quantity-input").val("0");
+
+      function cartItemsQtyAdd() {
+        let cartQty = 0;
+        for (var i = 0; i < cart.length; i++) {
+          cartQty += Number(cart[i].quantity);
+        }
+        // Function updates cart button with qty of items in it
+        function updateCartBtn() {
+          if (cart.length > 1) {
+            $(".admin-btn > span").text(" - " + cartQty + " items");
+          } else {
+            $(".admin-btn > span").text(" - " + cartQty + " item");
+          }
+        }
+        updateCartBtn();
+      }
+      cartItemsQtyAdd();
     }
   });
 
@@ -153,6 +160,23 @@ $(() => {
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].name === $parent.find(".item-name").text()) cart.splice(i, 1);
     }
+
+    function cartItemsQtySub() {
+      let cartQty = 0;
+      for (var i = 0; i < cart.length; i++) {
+        cartQty -= Number(cart[i].quantity);
+      }
+      // Function updates cart button with qty of items in it
+      function updateCartBtn() {
+        if (cart.length > 1) {
+          $(".admin-btn > span").text(" - " + Math.abs(cartQty) + " items");
+        } else {
+          $(".admin-btn > span").text(" - " + Math.abs(cartQty) + " item");
+        }
+      }
+      updateCartBtn();
+    }
+    cartItemsQtySub();
     $parent.remove();
     cartTotal(cart);
   });
@@ -177,7 +201,6 @@ $(() => {
   //Checkout button doing post request
   $("#side-bar .checkout-btn").on("click", event => {
     event.preventDefault();
-    console.log(cart);
     $.ajax({
       type: "POST",
       url: "/",
