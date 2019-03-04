@@ -7,14 +7,6 @@ const authToken = "c7ddf7090ebf04a597f74545d2f06b76"; // Your Auth Token from ww
 const client = new twilio(accountSid, authToken);
 module.exports = (knex) => {
 
-  //Function to text customers
-  client.messages.create({
-      body: 'Your food will be ready in pick_up_time minutes',
-      to: 'GUEST.PHONE', // PHONE NUMBER PROVIDED BY DB, can use function?
-      from: '+16042393009' // this is our Twilio server number
-    })
-    .then((message) => console.log(message.sid));
-
   //Function update DB
   function addPickup(id, input) {
     knex('orders')
@@ -23,16 +15,7 @@ module.exports = (knex) => {
         pick_up_time: input
       });
   }
-
-  //Function update DB
-  function addPending(id) {
-    knex('orders')
-      .where('id', id)
-      .update({
-        pending: true
-      });
-  }
-
+  
   router.get("/", (req, res) => {
     res.render("restaurant")
   });

@@ -1,13 +1,48 @@
 // Script for restaurant.ejs
 // Creates html structure in restaurant page
-function addOrderToRestaurant() {
-  let orderBox = `
-    <div class="accordion-header">Order #344</div>
+
+function convertDate(time) {
+  let date = new Date(time);
+  let hours = date.getHours();
+  let ampm;
+  if (hours > 12) {
+    if (hours === 12)
+      ampm = "pm";
+    else {
+      ampm = "pm"
+      hours -= 12;
+    }
+  }
+  else
+    ampm = "am";
+  let minutes = "0" + date.getMinutes();
+  return hours + ':' + minutes.substr(-2) + ampm;
+}
+
+
+function addOrderHeader(order) { //adds a header for each order
+  let contents = `
+    <div class="accordion-header">Order ${order.order_id} from ${order.guest_name}, ${order.phone} at ${convertDate(order.time_stamp)}</div>
     <div class="accordion-content">
-      <div class="order-items" class="d-flex justify-content-start order-item">
-        
-      </div>
-      <!--Order total-->
+      <div class="order-items" class="d-flex justify-content-start order-item"></div>
+    </div>
+    `;
+  $(contents).appendTo("#orders");
+}
+//calls information for an order to give to addOrderContent to append contents to order header
+function addAllContent(order_id) {
+  $.ajax({
+    method: 'GET',
+    url: `/api/orders/${order_id}`
+  }).done(order => { //gets an array of order_id, guest_name, phone
+      for(contents of order) {
+        addOrderContent(contents);
+      }
+    });
+}
+
+function addOrderContent(details) {
+  let showOrder = `
       <div class="d-flex justify-content-start">
           <div class="container">
               <div class="row">
@@ -21,10 +56,10 @@ function addOrderToRestaurant() {
                     </form>
                 </div>
               </div>
-      <!--Order total-->
           </div>
+      </div>
       `;
-  return $("#orders").append(orderBox);
+  return $(".accordian-content").append(showOrder);
 }
 
 // Creates html structure in restaurant page
@@ -41,24 +76,17 @@ function addItemsToOrder() {
   return $(".order-items").append(orderItems);
 }
 
-// request to resource.js create json obj
 $(() => {
+  
   $.ajax({
     method: 'GET',
     url: '/api/orders'
-  }).done(orderObj => {
-
-    //recieving DB order data in json obj
-    //orderFunction1(orderObj) to create html element
-    //orderFunction2(orderObj) to create html element
-    //action to display html element ******
-
+  }).done(orders => { //gets an array of order_id, guest_name, phone
+    for(order of orders) {
+      addOrderHeader(order);
+      addAllContent(order.order_id);
+    }
   });
-});
-
-$(() => {
-  addOrderToRestaurant();
-  addItemsToOrder();
 
   // Accordion functionality for orders
   $(".accordion").on("click", ".accordion-header", function () {
@@ -67,9 +95,7 @@ $(() => {
       .next()
       .slideToggle();
   });
-});
 
-$(() => {
   $('confirm-order-button-ID').on('submit', (event) => {
     event.preventDefault();
     $.post('/restaurant/')
@@ -79,8 +105,8 @@ $(() => {
       .fail((err) => {
         console.error("Post failed");
       })
-
-    //.done
-    //send feedback
   });
+  
 });
+
+  
