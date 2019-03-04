@@ -12,7 +12,9 @@ function createOrderElement(product) {
           </div>
         </div>
 <div class="col-12 col-md-2 "><p class="order-item-quantity">Quantity: ${product.quantity}</p></div>
-        <div class="col-12 col-md-2 "><p class="order-item-price">$${(product.price * product.quantity).toFixed(2)}</p></div>
+        <div class="col-12 col-md-2 "><p class="order-item-price">$${(product.price * product.quantity).toFixed(
+          2
+        )}</p></div>
       </div>
     </div>
   `;
@@ -24,22 +26,21 @@ function checkConfirm() {
   $.ajax({
     method: "GET",
     url: `/api/time/${window.location.pathname.replace("/orders/", "")}`
-  })
-    .done(time => {
-      if (time) {
-        $(".messageAccepted").show();
-        $(".waitingConfirmation").hide();
-        return true;
-      }
-      console.log("WAITING!")
-    }) 
+  }).done(time => {
+    if (time) {
+      $(".messageAccepted").show();
+      $(".waitingConfirmation").hide();
+      return true;
+    }
+    console.log("WAITING!");
+  });
 }
 
 const escape = function(text) {
-  let div = document.createElement('div');
+  let div = document.createElement("div");
   div.appendChild(document.createTextNode(text));
   return div.innerHTML;
-}
+};
 
 // ----------------------
 $(() => {
@@ -55,9 +56,10 @@ $(() => {
       .fail(err => {
         console.error("error posting in front end");
       })
-      .then(() => { //change the section to show an order confirmation
-        $(".checkout-form").css("display","none");
-        $(".user-checkout h3").css("display","none");
+      .then(() => {
+        //change the section to show an order confirmation
+        $(".checkout-form").css("display", "none");
+        $(".user-checkout h3").css("display", "none");
         let guestName = $(".checkout-form input[name='fname']").val();
         let guestPhone = $(".checkout-form input[name='lname']").val();
         let confirmedMessage = `
@@ -70,7 +72,7 @@ $(() => {
           </div>
         `;
         $(confirmedMessage).prependTo(".user-checkout");
-      })
+      });
   });
 
   //load all the product orders for the current order
@@ -87,34 +89,34 @@ $(() => {
     .fail(error => {
       console.error("error loading products");
     })
-    .then((orderProducts) => {//change the total display
+    .then(orderProducts => {
+      //change the total display
       //set all the totals
       $(".price").text(() => {
         let total = 0;
         for (let orderProduct of orderProducts) {
           total += Number(orderProduct.price) * Number(orderProduct.quantity);
         }
-        $(".taxes").text("$" + (total * .05).toFixed(2));
+        $(".taxes").text("$" + (total * 0.05).toFixed(2));
         $("<span>Taxes: </span>").prependTo(".taxes");
-        $(".final-price").text("$" + (total * .05 + total).toFixed(2));
-        
+        $(".final-price").text("$" + (total * 0.05 + total).toFixed(2));
+
         return "$" + total.toFixed(2);
-      })
+      });
     })
     .then(() => $("<span>Sub-Total: </span>").prependTo(".price"));
-			
-var numberOfEntries = false;
-setInterval(function(){
+
+  var numberOfEntries = false;
+  var timer = setInterval(function() {
     $.ajax({
       url: `/api/time/${window.location.pathname.replace("/orders/", "")}`,
-      type: 'GET',
-    })
-    .done(function(data) {
-      console.log(data);
-      if(data != numberOfEntries){
-          $(".messageAccepted").show();
-          $(".waitingConfirmation").hide();
-          return true;
+      type: "GET"
+    }).done(function(data) {
+      if (data != numberOfEntries) {
+        $(".messageAccepted").show();
+        $(".waitingConfirmation").hide();
+        clearInterval(timer);
+        return true;
         numberOfEntries = updatedNumberOfEntries;
       }
     });
