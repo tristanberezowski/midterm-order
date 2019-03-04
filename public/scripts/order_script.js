@@ -12,12 +12,18 @@ function createOrderElement(product) {
           </div>
         </div>
 <div class="col-12 col-md-2 "><p class="order-item-quantity">Quantity: ${product.quantity}</p></div>
-        <div class="col-12 col-md-2 "><p class="order-item-price">$${product.price * product.quantity}</p></div>
+        <div class="col-12 col-md-2 "><p class="order-item-price">$${(product.price * product.quantity).toFixed(2)}</p></div>
       </div>
     </div>
   `;
   let $element = $(element);
   return $element;
+}
+
+const escape = function(text) {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(text));
+  return div.innerHTML;
 }
 // ----------------------
 $(() => {
@@ -33,8 +39,25 @@ $(() => {
       })
       .fail(err => {
         console.error("error posting in front end");
-      });
+      })
+      .then(() => { //change the section to show an order confirmation
+        $(".checkout-form").css("display","none");
+        $(".user-checkout h3").css("display","none");
+        let guestName = $(".checkout-form input[name='fname']").val();
+        let guestPhone = $(".checkout-form input[name='lname']").val();
+        let confirmedMessage = `
+        <div class="confirmation-message">
+          <article>
+            <h4>Hi ${guestName}, thanks for ordering from <b>Foody!</b></h4>
+            <p>We will text ${guestPhone} when your order is ready</p>
+          </article>
+          </div>
+        `;
+        $(confirmedMessage).prependTo(".user-checkout");
+      })
   });
+
+  //load all the product orders for the current order
   $.ajax({
     method: "GET",
     url: `/api${window.location.pathname}`
