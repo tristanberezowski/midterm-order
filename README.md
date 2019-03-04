@@ -72,6 +72,6 @@ Tristan Berezowski, Ralf Pinheiro, Vincent Wong
 
 ![alt text](/public/images/order_submit_url.png "Order Submission")
 
-![alt text](/public/images/restaurant_order_list "Restaurant Order List")
+![alt text](/public/images/restaurant_order_list.png "Restaurant Order List")
 
-![alt text](/public/images/restauran_order_detail "Restaurant Order Details")
+![alt text](/public/images/restauran_order_detail.png "Restaurant Order Details")
