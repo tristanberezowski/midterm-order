@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 module.exports = (knex) => {
 
@@ -11,15 +11,18 @@ module.exports = (knex) => {
       .from("products")
       .then((results) => {
         res.json(results);
-    });
+      });
   });
 
-  router.get("/order", (req, res) => {
-    console.log(req.body)
-    // knex
-    //   .select("*")
-    //   .from()
-  })
+  //route to create json obj for html element creation
+  router.get('/orders', (req, res) => {
+    knex
+      .select('*')
+      .from('orders')
+      .then((ordersObj) => {
+        res.json(ordersObj);
+      });
+  });
 
   return router;
 }
