@@ -1,8 +1,8 @@
-function createOrderElement(product, quantity) {
+function createOrderElement(product) {
   let element = `
   <div class="d-flex justify-content-start order-item">
       <div class="row">
-        <div class="col-12 col-md-2"><img class="order-item-image" src="${product.img}" /></div>
+        <div class="col-12 col-md-2"><img class="order-item-image" src="../${product.img}" /></div>
         <div class="col-12 col-md-6 ">
           <p class="order-item-name">${product.name}</p>
           <div>
@@ -11,8 +11,8 @@ function createOrderElement(product, quantity) {
             </p>
           </div>
         </div>
-<div class="col-12 col-md-2 "><p class="order-item-quantity">Quantity: ${quantity}</p></div>
-        <div class="col-12 col-md-2 "><p class="order-item-price">$${product.price * quantity}</p></div>
+<div class="col-12 col-md-2 "><p class="order-item-quantity">Quantity: ${product.quantity}</p></div>
+        <div class="col-12 col-md-2 "><p class="order-item-price">$${product.price * product.quantity}</p></div>
       </div>
     </div>
   `
