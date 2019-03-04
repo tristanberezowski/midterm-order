@@ -46,18 +46,17 @@ function addOrderHeader(order) { //adds a header for each order
 }
 
 //calls information for an order to give to addOrderContent to append contents to order header
-function addAllContent(order_id) {
+function addAllContent(orderId) {
   $.ajax({
     method: 'GET',
-    url: `/api/orders/${order_id}`
+    url: `/api/orders/${orderId}`
   }).done(order => {
     var total = 0;
       for(contents of order) { //order is quantity, price, name, img, orders.id
         addOrderContent(contents);
-        total += Number(contents.quantity) * Number(contents.price);
-        //console.log(total)
+        total += (Number(contents.quantity) * Number(contents.price));
       }
-    $(`#total${order.order_id}`).text(`Order Total: $${total}`);
+    $(`#total${orderId}`).text(`Order Total: $${(total).toFixed(2)}`);
     });
 }
 
