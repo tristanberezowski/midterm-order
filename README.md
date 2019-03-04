@@ -64,7 +64,9 @@ Tristan Berezowski, Ralf Pinheiro, Vincent Wong
 
 ## Final Product
 
-!['Selecting items on home page'](screenshot1)
-!['Displaying items in cart'](screenshot2)
-!['Order page to confirm items'](screenshot3)
-!['Order page notifying text sent to restaurant'](screenshot4)
+!['Selecting items on home page'](https://github.com/tristanberezowski/midterm-order/blob/master/docs/1.%20home_index_url.png)
+!['Displaying items in cart'](https://github.com/tristanberezowski/midterm-order/blob/master/docs/2.%20home_index_cart.png)
+!['Order page to confirm items'](https://github.com/tristanberezowski/midterm-order/blob/master/docs/3.%20order_url.png)
+!['Order page notifying text sent to restaurant'](https://github.com/tristanberezowski/midterm-order/blob/master/docs/4.%20order_submit_url.png)
+!['Restaurant orders list'](https://github.com/tristanberezowski/midterm-order/blob/master/docs/5.restaurant_order_list.png)
+!['Restaurant order details'](https://github.com/tristanberezowski/midterm-order/blob/master/docs/6.restauran_order_detail.png)
