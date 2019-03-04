@@ -82,6 +82,14 @@ $(() => {
 
   const cart = [];
 
+  function emptyCart() {
+    if (cart.length === 0) {
+      $(".empty-cart").show();
+      $(".sub-total").hide();
+    }
+  }
+  emptyCart();
+
   // Accordion functionality (Restaurant page)
   $(".accordion").on("click", ".accordion-header", function() {
     $(this)
@@ -133,6 +141,9 @@ $(() => {
         cartTotal(cart);
       }
 
+      $(".empty-cart").hide();
+      $(".sub-total").show();
+
       $parent.children(".quantity-input").val("0");
 
       function cartItemsQtyAdd() {
@@ -175,6 +186,10 @@ $(() => {
         }
       }
       updateCartBtn();
+    }
+    if (cart.length === 0) {
+      $(".empty-cart").show();
+      $(".sub-total").hide();
     }
     cartItemsQtySub();
     $parent.remove();

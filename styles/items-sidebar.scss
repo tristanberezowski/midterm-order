@@ -29,8 +29,12 @@ $border-color: #eaeaea;
 .close-side-bar {
   font-weight: bold;
   background-color: $heading-color !important;
-  padding: 8px;
+  padding: 9px;
   color: $primary-color !important;
+}
+
+.close-side-bar a:hover {
+  text-decoration: none;
 }
 
 .checkout-btn {
@@ -65,4 +69,22 @@ $border-color: #eaeaea;
 
 .remove-btn {
   padding-top: 10px;
+}
+
+.show-item {
+  display: inline;
+}
+
+.hide-item {
+  display: none;
+}
+
+.empty-cart {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.empty-cart img {
+  max-width: 100%;
+  margin-top: 100px;
 }
