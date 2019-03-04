@@ -20,11 +20,27 @@ function createOrderElement(product) {
   return $element;
 }
 
+function checkConfirm() {
+  $.ajax({
+    method: "GET",
+    url: `/api/time/${window.location.pathname.replace("/orders/", "")}`
+  })
+    .done(time => {
+      if (time) {
+        $(".messageAccepted").show();
+        $(".waitingConfirmation").hide();
+        return true;
+      }
+      console.log("WAITING!")
+    }) 
+}
+
 const escape = function(text) {
   let div = document.createElement('div');
   div.appendChild(document.createTextNode(text));
   return div.innerHTML;
 }
+
 // ----------------------
 $(() => {
   //submit user data and display order confirmed asynchronously
@@ -35,7 +51,6 @@ $(() => {
       .done(() => {
         $("#order-confirmation").css("opacity", "1");
         $(".checkout-form button").attr("disabled", true);
-        console.log("order placed");
       })
       .fail(err => {
         console.error("error posting in front end");
@@ -48,8 +63,9 @@ $(() => {
         let confirmedMessage = `
         <div class="confirmation-message">
           <article>
-            <h4>Hi ${guestName}, thanks for ordering from <b>Foody!</b></h4>
-            <p>We will text ${guestPhone} when your order is ready</p>
+            <h5 class="messageAccepted">${guestName}, your order has been accepted, please check you phone for a detailed info.</h5>
+            <h4 class="waitingConfirmation">Hi ${guestName}, thanks for ordering from <b>Foody!</b></h4>
+            <p class="waitingConfirmation">We will text ${guestPhone} when your order is ready.</p> 
           </article>
           </div>
         `;
@@ -86,6 +102,21 @@ $(() => {
       })
     })
     .then(() => $("<span>Sub-Total: </span>").prependTo(".price"));
-
-  
+			
+var numberOfEntries = false;
+setInterval(function(){
+    $.ajax({
+      url: `/api/time/${window.location.pathname.replace("/orders/", "")}`,
+      type: 'GET',
+    })
+    .done(function(data) {
+      console.log(data);
+      if(data != numberOfEntries){
+          $(".messageAccepted").show();
+          $(".waitingConfirmation").hide();
+          return true;
+        numberOfEntries = updatedNumberOfEntries;
+      }
+    });
+  }, 5000);
 });

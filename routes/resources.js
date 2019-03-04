@@ -38,6 +38,16 @@ module.exports = (knex) => {
         console.error("error getting order products");
       });
   });
+  router.get("/time/:id", (req, res) => {
+    knex("orders")
+    .where("id", req.params.id)
+    .select("pick_up_time")
+    .then(result => {
+      console.log("RESULT", result);
+      res.json(result[0].pick_up_time);
+    })
+  })
+  
 
   return router;
 }
