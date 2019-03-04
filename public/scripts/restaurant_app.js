@@ -93,7 +93,7 @@ $(() => {
         let orderId = $(event.target).attr('id').replace("form", "");
         $.post('/restaurant/', {id: orderId, pickUpTime: pickUpTime})
           .done(() => {
-            console.log("POSTED");
+            $(`#total${orderId}`).text("Order confirmed, customer has been texted");
           })
           .fail((err) => {
             console.error("Post failed");

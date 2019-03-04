@@ -33,7 +33,7 @@ module.exports = knex => {
       order_id: Number(req.body.order_id)
     })
     .then((result) => {
-      //textRestaurant();
+      textRestaurant();
       res.status(202).end();
     })
     .catch((err) => console.error("issue with inserting user data"));
