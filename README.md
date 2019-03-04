@@ -1,148 +1,70 @@
-# Node Skeleton
+#FOODY, AN ONLINE FOOD ORDERING APP
 
-## Project Setup
+Lighthouse Labs Web Development Program
 
-1. Create your own empty repo on GitHub
-2. Clone this repository (do not fork)
-  - Suggestion: When cloning, specify a different folder name that is relevant to your project
-3. Remove the git remote: `git remote rm origin`
-4. Add a remote for your origin: `git remote add origin <your github repo URL>`
-5. Push to the new origin: `git push -u origin master`
-6. Verify that the skeleton code now shows up in your repo on GitHub
+##Project contributors
 
-## Getting Started
+Tristan Berezowski, Ralf Pinheiro, Vincent Wong
 
-1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
-2. Update the .env file with your correct local information
-3. Install dependencies: `npm i`
-4. Fix to binaries for sass: `npm rebuild node-sass`
-5. Run migrations: `npm run knex migrate:latest`
-  - Check the migrations folder to see what gets created in the DB
-6. Run the seed: `npm run knex seed:run`
-  - Check the seeds file to see what gets seeded in the DB
-7. Run the server: `npm run local`
-8. Visit `http://localhost:8080/`
+## Overview
+
+- Foody is a full stack application allowing users to order from restaurants online.
+
+- Users can view and edit selected items, with their cart inventory and order prices generated dynamically. Upon ordering the app will notify the restaurant via SMS.
+
+- Restaurants (when logged in) can see their unaccepted orders, and upon accepting will notify users via SMS as well.
+
+- Users website page will be updated to show their order has been accepted.
 
 ## Dependencies
 
-- Node 5.10.x or above
-- NPM 3.8.x or above
+- license: ISC
+- node 5.10 or above
+- npm 3.8 or above
+- body-parser: 1.15.2 or above
+- cookie-session: 2.0.0-beta.3 or above
+- dotenv: 2.0.0 or above
+- ejs: 2.4.1 or above
+- express: 4.13.4 or above
+- knex: 0.11.7 or above
+- knex-logger: 0.1.0 or above
+- morgan: 1.7.0 or above
+- node-sass-middleware: 0.9.8 or above
+- pg: 6.0.2 or above
+- twilio: 3.29.0 or above
 
-# Online Ordering Web-app
-By Ralf Pinheiro, Tristan Berezowski, and Vincent Wong
+## Getting Started
 
-### User Story
+1. Create the `.env` by using `.env.example` as a reference: `cp.env.example .env`
 
-- As consumer (index -> order)
-1. Visit website
-2. browse and select what you want to order
-3. submit order with details
-4. recieve notification for when it is ready to pick up
-- 
+2. Update the .env file with your correct local information
 
-- As restaurant owner (index -> owner)
-1. Receive notification from sms
-2. visit website as admin
-3. accept order and specify how long until ready
+- DB_HOST = localhost
+- DB_USER = labber
+- DB_PASS = labber
+- DB_NAME = midterm
+- DB_SSL = false
+- DB_PORT = 5432
 
-## Data Needed For MVP
+3. Install dependencies: `npm i`
 
-- Webpages
-1. (order) index page  (index.ejs)
-  - items to add to new order
-2. order view/submit page (order.ejs)
-  - all items selected and buttons
-3. restaurant view orders list (restaurant.ejs)
-  - list all orders submitted
-  - order expands to view/accept/specify single order
+4. Fix to binaries for sass: `npm rebuild node-sass`
 
-#### Partials
-1. Fixed sidebar for viewing cart/order
-2. Header with link for restaurant owner login
-3. Create with javascript -> order box has status, can expand on click -> description, information about order, submit for time
+5. Run migrations: `npm run knex migrate:latest`
 
-#### Order Structure
-1. Order
-  - id
-  - pickup time
-  - product
-    - id
-    - name
-    - quantity
-    - description
-    - price
-    - image
-  - timestamp
-  - user
-    - id
-    - phone number
-    - name
+- Check the migrations folder to see what gets created in the DB
 
-#### Database Storage
+6. Run the seed: `npm run knex seed:run`
 
-  1. orders
-    - id          (primary)
-    - pick_up_time
-    - time_stamp
-  
-  2. products
-    - id          (primary)
-    - name
-    - image
-    - description
-    - price
-  
-  3. product_orders
-    - id          (primary)
-    - product_id  (foreign)
-    - quantity
-    - order_id    (foreign)
-  
-  4. guests
-    - id          (primary)
-    - phone
-    - name
-    - order_id    (foreign)
+- Check the seeds file to see what gets seeded in the DB
 
-  5. restaurants
-    - id          (primary)
-    - password
+7. Run the server: `npm run local`
 
-## Technology Choices
+8. Visit `http://localhost:8080/`
 
-  1. Deployment = Heroku
-  2. Backend = node.js with express server
-  3. Database = psql with knex
-  4. Frontend = Bootstrap with sass
-    - html with javascript
-  
-#### Modules
+## Final Product
 
-###### Core
-  1. Express
-  2. psql/knex
-  3. bootstrap
-  4. Sass
-###### Function
-  1. Session cookies
-  2. Body Parser
-  3. Hashing
-  4. Twilio (api)
-
-###### HTML/CDN links
-  1. Jquery
-  2. Bootstrap
-
-### Define Routes
-
-  1. Index "/"
-    - get: index loads and you can make a new order from this page 
-    - post: create the order object and redirect to order page
-  2. Order Page "/:order"
-    - get: loads all data from order of order.id = req.params.order
-    - post: submit the order, text the restaurant and update page once successful
-  3. Restaurant list "/owner"
-    - get: loads all orders placed with links to each order page
-    - submitting orders posts to "/owner/:id"
-  4. Restaurant order "/owner/:id"
-    - post: submit time for pickup
+!['Selecting items on home page'](screenshot1)
+!['Displaying items in cart'](screenshot2)
+!['Order page to confirm items'](screenshot3)
+!['Order page notifying text sent to restaurant'](screenshot4)
