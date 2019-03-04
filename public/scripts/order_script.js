@@ -63,7 +63,6 @@ $(() => {
     url: `/api${window.location.pathname}`
   })
     .done(orderProducts => {
-      console.log(orderProducts)
       for (orderProduct of orderProducts) {
         createOrderElement(orderProduct).prependTo("#order-container");
       }
