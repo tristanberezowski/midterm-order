@@ -23,7 +23,7 @@ function addOrderHeader(order) { //adds a header for each order
   let contents = `
     <div class="accordion-header">Order ${order.order_id} from ${order.guest_name}, ${order.phone} at ${convertDate(order.time_stamp)}</div>
     <div class="accordion-content">
-      <div class="order-items" class="d-flex justify-content-start order-item">
+      <div id="items${order.order_id}" class="order-items" class="d-flex justify-content-start order-item">
       </div>
       <!--Order total-->
       <div class="d-flex justify-content-start">
@@ -33,7 +33,7 @@ function addOrderHeader(order) { //adds a header for each order
                     <div class="order-total">
                       <h4 id=total${order.order_id}>Order Total - $15,00</h4>
                     </div>
-                    <form class="restaurant-form">
+                    <form id=form${order.order_id} class="restaurant-form">
                       <input type="text" name="lname" type="number" placeholder="Time for pick up"/><br />
                       <button type="submit" value="Submit">Accept Order</button>
                     </form>
@@ -52,10 +52,10 @@ function addAllContent(order_id) {
     url: `/api/orders/${order_id}`
   }).done(order => {
     var total = 0;
-      for(contents of order) { //order is quantity, price, name, img
+      for(contents of order) { //order is quantity, price, name, img, orders.id
         addOrderContent(contents);
         total += Number(contents.quantity) * Number(contents.price);
-        console.log(total)
+        //console.log(total)
       }
     $(`#total${order.order_id}`).text(`Order Total: $${total}`);
     });
@@ -72,7 +72,7 @@ function addOrderContent(details) {
                 <div class="col-12 col-md-2"><p class="order-item-quantity">Qty ${details.quantity}</p></div>
                 <div class="col-12 col-md-2"><p class="order-item-price">$${(Number(details.quantity) * Number(details.price)).toFixed(2)}</p></div>
               </div>`;
-  return $(".order-items").append(orderItems);
+  return $(`#items${details.id}`).append(orderItems);
 }
 
 $(() => {
@@ -86,7 +86,21 @@ $(() => {
         addOrderHeader(order); //adds all headers for the orders
         addAllContent(order.order_id); //adds all content to order headers
       }
-    });
+    })
+    .then( () => {
+      $('.restaurant-form').on('submit', (event) => {
+        event.preventDefault();
+        let pickUpTime = $(event.target).children("input").val();
+        let orderId = $(event.target).attr('id').replace("form", "");
+        $.post('/restaurant/', {id: orderId, pickUpTime: pickUpTime})
+          .done(() => {
+            console.log("POSTED");
+          })
+          .fail((err) => {
+            console.error("Post failed");
+          })
+      });
+    })
 
   // Accordion functionality for orders
   $(".accordion").on("click", ".accordion-header", function () {
@@ -96,16 +110,7 @@ $(() => {
       .slideToggle();
   });
 
-  $('confirm-order-button-ID').on('submit', (event) => {
-    event.preventDefault();
-    $.post('/restaurant/')
-      .done(() => {
-        console.log("POSTED");
-      })
-      .fail((err) => {
-        console.error("Post failed");
-      })
-  });
+  
 
 });
 
