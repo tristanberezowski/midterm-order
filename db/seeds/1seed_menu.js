@@ -11,14 +11,14 @@ exports.seed = function (knex, Promise) {
         knex("products").insert({
           id: 1,
           name: 'Kale Juice',
-          description: 'Ingredients: kale, celery, cucumber, parsley, lemon, ginger.',
+          description: 'Ingredients: kale, celery, cucumber, parsley, lemon, ginger. Fresh juice to start a fresh day.',
           price: 3.33,
           img: './images/product1.webp'
         }),
         knex("products").insert({
           id: 2,
           name: "Classic Acai",
-          description: 'Fresh açai and assorted berries with banana, honey, granola and almond milk.',
+          description: 'Fresh açai and assorted berries topped with banana, organic honey, granola and almond milk.',
           price: 9.66,
           img: './images/product2.webp'
         }),
@@ -31,15 +31,15 @@ exports.seed = function (knex, Promise) {
         }),
         knex('products').insert({
           id: 4,
-          name: 'Cauliflower + Chickpea',
-          description: 'Quinoa, roasted cauliflower, chickpeas, tahini and maple dressing topped with sprouts and pickled onions.',
+          name: 'Cauliflower Salad',
+          description: 'Quinoa, roasted cauliflower, tahini and maple dressing topped with sprouts and pickled onions.',
           price: 10.43,
           img: './images/product4.webp'
         }),
         knex('products').insert({
           id: 5,
           name: 'Creamy Nutty',
-          description: 'Fresh açai and assorted berries with banana, glory nut butter and cacao nibs.',
+          description: 'Fresh açai and assorted berries with banana, creamy nut butter, organic honey and cacao nibs.',
           price: 11.95,
           img: './images/product5.webp'
         }),
@@ -52,22 +52,22 @@ exports.seed = function (knex, Promise) {
         }),
         knex('products').insert({
           id: 7,
-          name: 'Turmeric + Ginger',
-          description: 'Ingredients: Ginger, turmeric, orange, grapefruit, lime, black pepper, cayenne.',
-          price: 2.73,
+          name: 'Sweet Tropical',
+          description: 'Fresh açai berries topped with banana, citrus fruits, sustainable bee pollen and coconut nectar.',
+          price: 11.85,
           img: './images/product7.webp'
         }),
         knex('products').insert({
           id: 8,
-          name: 'Sweet Tropical',
-          description: 'Fresh açai berries topped with banana, citrus fruits, bee pollen and coconut nectar.',
-          price: 11.85,
+          name: 'Detoxify',
+          description: 'Ingredients: Ginger, turmeric, orange, grapefruit, lime, black pepper and. New drink, new you.',
+          price: 2.73,
           img: './images/product8.webp'
         }),
         knex('products').insert({
           id: 9,
-          name: 'Carrot Pineapple Orange Lemon Turmeric',
-          description: 'carrot, pineapple, orange, lemon, and turmeric.',
+          name: 'Fresh Karma',
+          description: 'Organic carrot, pineapple, orange, lemon, and turmeric. Refresh your body and karma.',
           price: 4.98,
           img: './images/product9.webp'
         }),
