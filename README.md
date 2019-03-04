@@ -1,4 +1,4 @@
-# FOODY, AN ONLINE FOOD ORDERING APP
+# Foody, An OnLine Food Ordering APP
 
 Lighthouse Labs Web Development Program
 
@@ -64,9 +64,14 @@ Tristan Berezowski, Ralf Pinheiro, Vincent Wong
 
 ## Final Product
 
-!['Selecting items on home page'](https://github.com/tristanberezowski/midterm-order/blob/master/docs/1.%20home_index_url.png?raw=true)</br>
-!['Displaying items in cart'](https://github.com/tristanberezowski/midterm-order/blob/master/docs/2.%20home_index_cart.png?raw=true)</br>
-!['Order page to confirm items'](https://github.com/tristanberezowski/midterm-order/blob/master/docs/3.%20order_url.png?raw=true)</br>
-!['Order page notifying text sent to restaurant'](https://github.com/tristanberezowski/midterm-order/blob/master/docs/4.%20order_submit_url.png?raw=true)</br>
-!['Restaurant orders list'](https://github.com/tristanberezowski/midterm-order/blob/master/docs/5.restaurant_order_list.png?raw=true)</br>
-!['Restaurant order details'](https://github.com/tristanberezowski/midterm-order/blob/master/docs/6.restauran_order_detail.png?raw=true)
+![alt text](/public/images/home_index_url.png "Foody Menu")
+
+![alt text](/public/images/home_index_cart.png "Cart")
+
+![alt text](/public/images/order_url.png "Order Details")
+
+![alt text](/public/images/order_submit_url.png "Order Submission")
+
+![alt text](/public/images/restaurant_order_list "Restaurant Order List")
+
+![alt text](/public/images/restauran_order_detail "Restaurant Order Details")
