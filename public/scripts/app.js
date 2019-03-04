@@ -154,9 +154,9 @@ $(() => {
         // Function updates cart button with qty of items in it
         function updateCartBtn() {
           if (cart.length > 1) {
-            $(".admin-btn > span").text(" - " + cartQty + " items");
+            $(".admin-btn > span").text(" (" + cartQty + ") ");
           } else {
-            $(".admin-btn > span").text(" - " + cartQty + " item");
+            $(".admin-btn > span").text(" (" + cartQty + ")");
           }
         }
         updateCartBtn();
