@@ -16,9 +16,13 @@ module.exports = (knex) => {
 
   //route to create json obj for restaurant html element creation
   router.get('/orders', (req, res) => {
+    console.log('asdawdasd');
     knex
       .select('*')
-      .from('orders')
+      .from('products')
+      .innerJoin('product_orders', 'product_orders.product_id', 'products.id')
+      .innerJoin('orders', 'orders.id', 'product_orders.order_id')
+      .innerjoin('guests', 'orders.id', 'order_id')
       .then((ordersObj) => {
         res.json(ordersObj);
       });

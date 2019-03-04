@@ -7,7 +7,7 @@ const authToken = "c7ddf7090ebf04a597f74545d2f06b76"; // Your Auth Token from ww
 const client = new twilio(accountSid, authToken);
 module.exports = (knex) => {
 
-  //function to text customers
+  //Function to text customers
   client.messages.create({
       body: 'Your food will be ready in pick_up_time minutes',
       to: 'GUEST.PHONE', // PHONE NUMBER PROVIDED BY DB, can use function?
@@ -15,62 +15,66 @@ module.exports = (knex) => {
     })
     .then((message) => console.log(message.sid));
 
-  //update DB
-  function addPickup() {
+  //Function update DB
+  function addPickup(id, input) {
     knex('orders')
-      .where('ID FOR THIS PARTICULAR ORDER')
+      .where("id", id)
       .update({
-        pick_up_time: 'form_field_input'
+        pick_up_time: input
       });
   }
 
-  //update DB
-  function addPending() {
+  //Function update DB
+  function addPending(id) {
     knex('orders')
-      .where('ID FOR THIS PARTICULAR ORDER')
+      .where('id', id)
       .update({
         pending: true
       });
   }
 
-  //render page on refresh
-  router.get('/', (req, res) => {
-
-    //join tables needed to call order data
-    knex.from('products')
-      .innerJoin('product_orders', 'product_orders.product_id', 'products.id')
-      .innerJoin('orders', 'orders.id', 'product_orders.order_id')
-      .select("*")
-      .then(rows => {
-        console.log("rows are", rows)
-        res.render("restaurant", {
-          rows
-        });
-      })
-      .catch(err => console.error("not able to retrieve from database"))
+  router.get("/", (req, res) => {
+    res.render("restaurant")
   });
 
   //THE REQ IS FROM THE SUBMIT BUTTON EVENT
-  router.post('/:confirm-order-button-id', (req, res) => {
+  router.post('/:id', (req, res) => {
 
     knex('orders')
-      .where('ID FOR THIS PARTICULAR ORDER')
+      .where('req.params.id')
       .then(() => {
-        addPickup();
-        addPending();
-        client.messages.create();
-        res.redirect('/restaurant');
+        addPickup(req.params.id);
+        addPending(req.params.id);
+        // client.messages.create();
       })
-      //can update customers via order page
+      //CAN NOTIFY CUSTOMERS OF CONFIRM AFTER DB ENTRY
       .catch((err) => {
         console.log('DB update failed', err);
-      });
+      })
+      .then(() => {
 
-    //alternatively, async update the page by looping
-    //back to on.event button
-
-    //ie. send a response in the form of JSON to restaurant_button.js
-    //to ie. adjust the confirm order button
+        knex()
+          .select('phone', 'pick_up_time')
+          .from('guests')
+          .innerJoin('orders', 'orders.id', 'order_id')
+          .where({
+            id: req.params.id
+          })
+          .then(dbResults => {
+            dbResults[0].phone
+            if (dbResults.length) {
+              client.messages.create({
+                body: `Your food will be ready in ${dbResults[0].pick_up_time} minutes`,
+                to: dbResults[0].phone, // PHONE NUMBER PROVIDED BY DB, can use function?
+                from: '+16042393009' // this is our Twilio server number
+              })
+            }
+            res.status(202).end();
+          })
+          .catch((err) => {
+            console.error('Couldnt find phone in DB');
+          })
+      })
   });
 
 

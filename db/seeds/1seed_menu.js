@@ -47,7 +47,7 @@ exports.seed = function (knex, Promise) {
           id: 6,
           name: 'Organic Seed Bar',
           description: 'Tahini and coconut oil base blended with a variety of antioxidant berries and raw seeds.',
-          price: 3.00,
+          price: 3.50,
           img: './images/product6.webp'
         }),
         knex('products').insert({
