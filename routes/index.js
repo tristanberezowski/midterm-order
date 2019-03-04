@@ -21,7 +21,7 @@ module.exports = knex => {
   router.post("/", (req, res) => {
     const newOrder = req.body.cart;
     knex("orders")
-      .insert({},
+      .insert({pick_up_time: 0},
         ["id"] //this will give idInside as the return value to this promise
       )
       .then(idInside => {
