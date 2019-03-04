@@ -1,20 +1,21 @@
 $primary-color: #f9f9f9;
 $heading-color: #dd3b3b;
 $paragraph-color: #505050;
+$border-color: #eaeaea;
 
 #side-bar {
   height: auto;
   overflow-y: scroll;
   position: fixed;
-  transition: 0.3s;
+  transition: 0.3s ease-in-out;
   overflow-x: hidden;
   top: 85px;
   right: 0;
   width: 0px;
   height: 100%;
-  background-color: #f7f7f7;
-  border-top: 1px solid #eaeaea;
-  border-left: 1px solid #eaeaea;
+  background-color: $primary-color;
+  border-top: 1px solid $border-color;
+  border-left: 1px solid $border-color;
   color: $paragraph-color;
   -webkit-box-shadow: -2px 4px 8px 0px rgba(0, 0, 0, 0.09);
   -moz-box-shadow: -2px 4px 8px 0px rgba(0, 0, 0, 0.09);

@@ -1,9 +1,10 @@
 $primary-color: #f9f9f9;
 $heading-color: #dd3b3b;
 $paragraph-color: #505050;
+$border-color: #eaeaea;
 
 body {
-  background-color: #fff;
+  background-color: white;
   color: $paragraph-color;
   transition: 0.3s;
 }
@@ -43,7 +44,7 @@ header .header-wrapper {
 }
 
 header .logo {
-  font-weight: bold;
+  font-weight: 900;
   margin-top: 15px;
 }
 
@@ -63,7 +64,7 @@ div.card {
   -moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.09);
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.09);
   border-radius: 2px !important;
-  border: 1px solid #eaeaea !important;
+  border: 1px solid $border-color !important;
   margin-bottom: 35px;
 }
 
@@ -109,14 +110,14 @@ div.card {
 
 .quantity-btn {
   display: inline-block;
-  border: 1px solid #ddd;
+  border: 1px solid $border-color;
   margin: 0px;
   width: 40px;
   height: 40px;
   text-align: center;
   vertical-align: middle;
   padding: 6px 0;
-  background: #eee;
+  background: rgb(248, 241, 241);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -179,4 +180,24 @@ input[type="quantity-input"]::-webkit-outer-spin-button {
   padding: 12px 20px 12px 20px;
   color: $primary-color;
   border: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
