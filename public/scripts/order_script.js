@@ -15,33 +15,37 @@ function createOrderElement(product) {
         <div class="col-12 col-md-2 "><p class="order-item-price">$${product.price * product.quantity}</p></div>
       </div>
     </div>
-  `
+  `;
   let $element = $(element);
-  return $element
+  return $element;
 }
-  // ----------------------
+// ----------------------
 $(() => {
   //submit user data and display order confirmed asynchronously
   $(".checkout-form").submit(function(event) {
     event.preventDefault();
-    let guestInfo = $(".checkout-form").serialize() + `&order_id=${window.location.pathname.replace("/orders/","")}`;
-    $.post("/orders", guestInfo).done(() => {
-      $("#order-confirmation").css("opacity","1")
-      $(".checkout-form button").attr("disabled", true);
-      console.log("order placed")
-    }).fail(err => {
-      console.error("error posting in front end");
-    })
+    let guestInfo = $(".checkout-form").serialize() + `&order_id=${window.location.pathname.replace("/orders/", "")}`;
+    $.post("/orders", guestInfo)
+      .done(() => {
+        $("#order-confirmation").css("opacity", "1");
+        $(".checkout-form button").attr("disabled", true);
+        console.log("order placed");
+      })
+      .fail(err => {
+        console.error("error posting in front end");
+      });
   });
   $.ajax({
     method: "GET",
     url: `/api${window.location.pathname}`
-  }).done(orderProducts => {
-    console.log(orderProducts)
-    for (orderProduct of orderProducts) {
-      createOrderElement(orderProduct).prependTo("#order-container");
-    }
-  }).fail(error => {
-    console.error("error loading products");
-  });
+  })
+    .done(orderProducts => {
+      console.log(orderProducts);
+      for (orderProduct of orderProducts) {
+        createOrderElement(orderProduct).prependTo("#order-container");
+      }
+    })
+    .fail(error => {
+      console.error("error loading products");
+    });
 });
