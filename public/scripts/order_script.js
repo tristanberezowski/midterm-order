@@ -65,7 +65,7 @@ $(() => {
         let confirmedMessage = `
         <div class="confirmation-message">
           <article>
-            <h5 class="messageAccepted">${guestName}, your order has been accepted, please check you phone for a detailed info.</h5>
+            <h5 class="messageAccepted">${guestName}, your order has been accepted. Please check your phone for more detailed info.</h5>
             <h4 class="waitingConfirmation">Hi ${guestName}, thanks for ordering from <b>Foody!</b></h4>
             <p class="waitingConfirmation">We will text ${guestPhone} when your order is ready.</p> 
           </article>

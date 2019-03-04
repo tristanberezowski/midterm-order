@@ -48,6 +48,10 @@ header .logo {
   margin-top: 15px;
 }
 
+.logo a:hover {
+  text-decoration: none !important;
+}
+
 header .admin-btn {
   position: absolute;
   right: 60px;

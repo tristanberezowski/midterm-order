@@ -5,12 +5,18 @@ $border-color: #ddd;
 
 .restaurant-orders {
   margin-top: 130px;
+  margin-bottom: 130px;
 }
 
 .restaurant-orders h1 {
   text-align: center;
   font-size: 2em;
   padding-bottom: 50px;
+}
+
+.item-row {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .accordion {
