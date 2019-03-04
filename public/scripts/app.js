@@ -15,7 +15,7 @@ function checkQuantity($quantityInput) {
   } else {
     return true;
   }
-};
+}
 
 // Creates restaurant menu
 const createProductMenu = function(product) {
@@ -66,7 +66,7 @@ function addToCart(item) {
     <div class="row">
         <div class="col-12 col-md-2 quantity"><b>${item.quantity}</b></div>
         <div class="col-12 col-md-6 item-name"><b>${item.name}</b></div>
-        <div class="col-12 col-md-4 item-price">$ ${item.total}</div>
+        <div class="col-12 col-md-4 item-price">$ ${item.total.toFixed(2)}</div>
     </div>
     <div class="remove-btn">
       <a href="#">Remove</a>
@@ -75,49 +75,24 @@ function addToCart(item) {
   return $("#side-bar").append(cartItem);
 }
 
-// Creates html structure for order items
-function addToOrder(item) {
-  let orderItem = `
-    <div class="d-flex justify-content-start order-item">
-    <div class="row">
-      <div class="col-12 col-md-2"><img class="order-item-image" src="./images/hot_dog.jpg" /></div>
-      <div class="col-12 col-md-6 ">
-        <p class="order-item-name">Gourmet Hot Dog</p>
-        <div>
-          <p class="order-item-description">
-            A footlong Vienna Beef hot dog, topped with relish, onions, tomatoes, pickle spears, sport peppers,
-            celery salt, and served on a giant, gourmet poppy seed bun.
-          </p>
-        </div>
-      </div>
-      <div class="col-12 col-md-2 "><p class="order-item-quantity">Qty 1</p></div>
-      <div class="col-12 col-md-2 "><p class="order-item-price">$ 3.99</p></div>
-    </div>
-    </div>`;
-  return $("#order-container").append(orderItem);
-}
-
 $(() => {
-  if(window.location.pathname !== "/") //app.js will still load after redirect
+  if (window.location.pathname !== "/")
+    //app.js will still load after redirect
     exit();
-  
+
   const cart = [];
 
-  // Function below is to update cart button with qty of items in it
+  // Function updates cart button with qty of items in it
+  function updateCartBtn() {
+    if (cart.length === 1) {
+      $(".admin-btn > span").text(" - " + cart.length + " item");
+    } else {
+      $(".admin-btn > span").text(" - " + cart.length + " items");
+    }
+  }
+  updateCartBtn();
 
-  // const cartQty = 0;
-
-  // function cartInfo() {
-  //   if (cart.length === 0) {
-  //     return cartQty;
-  //   } else {
-  //     cartQty = cart.length;
-  //     return cartQty;
-  //   }
-  // }
-  // cartInfo(cartQty);
-
-    // Accordion functionality (Restaurant page)
+  // Accordion functionality (Restaurant page)
   $(".accordion").on("click", ".accordion-header", function() {
     $(this)
       .toggleClass("active")
@@ -167,6 +142,7 @@ $(() => {
         cart.push(cartItem);
         cartTotal(cart);
       }
+      updateCartBtn();
       $parent.children(".quantity-input").val("0");
     }
   });
@@ -185,16 +161,18 @@ $(() => {
   $.ajax({
     method: "GET",
     url: "/api/products"
-  }).done(products => {
-    for (product of products) {
-      createProductMenu(product).appendTo("#product-container");
-    }
-  }).fail(error => {
-    console.error("error loading products");
-  });
+  })
+    .done(products => {
+      for (product of products) {
+        createProductMenu(product).appendTo("#product-container");
+      }
+    })
+    .fail(error => {
+      console.error("error loading products");
+    });
   //closes JQuery function
 
-//moved to page
+  //moved to page
 
   //Checkout button doing post request
   $("#side-bar .checkout-btn").on("click", event => {

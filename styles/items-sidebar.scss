@@ -3,6 +3,8 @@ $heading-color: #dd3b3b;
 $paragraph-color: #505050;
 
 #side-bar {
+  // max-height: calc(100vh);
+  overflow-y: scroll;
   position: fixed;
   transition: 0.3s;
   overflow-x: hidden;
