@@ -78,22 +78,22 @@ function addToCart(item) {
 // Creates html structure for order items
 function addToOrder(item) {
   let orderItem = `
-  <div class="d-flex justify-content-start order-item">
-  <div class="row">
-    <div class="col-12 col-md-2"><img class="order-item-image" src="./images/hot_dog.jpg" /></div>
-    <div class="col-12 col-md-6 ">
-      <p class="order-item-name">Gourmet Hot Dog</p>
-      <div>
-        <p class="order-item-description">
-          A footlong Vienna Beef hot dog, topped with relish, onions, tomatoes, pickle spears, sport peppers,
-          celery salt, and served on a giant, gourmet poppy seed bun.
-        </p>
+    <div class="d-flex justify-content-start order-item">
+    <div class="row">
+      <div class="col-12 col-md-2"><img class="order-item-image" src="./images/hot_dog.jpg" /></div>
+      <div class="col-12 col-md-6 ">
+        <p class="order-item-name">Gourmet Hot Dog</p>
+        <div>
+          <p class="order-item-description">
+            A footlong Vienna Beef hot dog, topped with relish, onions, tomatoes, pickle spears, sport peppers,
+            celery salt, and served on a giant, gourmet poppy seed bun.
+          </p>
+        </div>
       </div>
+      <div class="col-12 col-md-2 "><p class="order-item-quantity">Qty 1</p></div>
+      <div class="col-12 col-md-2 "><p class="order-item-price">$ 3.99</p></div>
     </div>
-    <div class="col-12 col-md-2 "><p class="order-item-quantity">Qty 1</p></div>
-    <div class="col-12 col-md-2 "><p class="order-item-price">$ 3.99</p></div>
-  </div>
-  </div>`;
+    </div>`;
   return $("#order-container").append(orderItem);
 }
 
@@ -103,17 +103,19 @@ $(() => {
   
   const cart = [];
 
-  const $cartQty = 0;
+  // Function below is to update cart button with qty of items in it
 
-  function cartInfo() {
-    if (cart.length === 0) {
-      return $cartQty;
-    } else {
-      $cartQty = cart.length;
-      return $cartQty;
-    }
-  }
-  cartInfo();
+  // const cartQty = 0;
+
+  // function cartInfo() {
+  //   if (cart.length === 0) {
+  //     return cartQty;
+  //   } else {
+  //     cartQty = cart.length;
+  //     return cartQty;
+  //   }
+  // }
+  // cartInfo(cartQty);
 
     // Accordion functionality (Restaurant page)
   $(".accordion").on("click", ".accordion-header", function() {
