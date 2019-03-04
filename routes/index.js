@@ -15,20 +15,7 @@ module.exports = knex => {
   }
 
   router.get("/", (req, res) => {
-    knex
-      .select("*")
-      .from("products")
-      .orderBy("id")
-      .then(products => {
-        let templateVars = {
-          items: products
-        };
-        res.render("index", templateVars);
-      })
-      .catch(err => {
-        console.error("Failure in getting items from database");
-        throw err;
-      });
+    res.render("index");
   });
 
   router.post("/", (req, res) => {

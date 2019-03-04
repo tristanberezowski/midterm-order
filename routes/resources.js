@@ -14,13 +14,28 @@ module.exports = (knex) => {
       });
   });
 
-  //route to create json obj for html element creation
+  //route to create json obj for restaurant html element creation
   router.get('/orders', (req, res) => {
     knex
       .select('*')
       .from('orders')
       .then((ordersObj) => {
         res.json(ordersObj);
+      });
+  });
+
+
+  router.get("/orders/:id", (req, res) => {
+    knex.from('products')
+      .innerJoin('product_orders', 'product_orders.product_id', 'products.id')
+      .innerJoin('orders', 'orders.id', 'product_orders.order_id')
+      .select("product_orders.quantity", "products.price", "products.name", "products.img", "description")
+      .where('orders.id', req.params.id)
+      .then((results) => {
+        res.json(results);
+      })
+      .catch((err) => {
+        console.error("error getting order products");
       });
   });
 

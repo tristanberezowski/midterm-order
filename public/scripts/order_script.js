@@ -33,8 +33,15 @@ $(() => {
       console.error("error posting in front end");
     })
   });
-
-  $.get("/api/order").done((items) => {
-    console.log(items);
-  })
+  $.ajax({
+    method: "GET",
+    url: `/api${window.location.pathname}`
+  }).done(orderProducts => {
+    console.log(orderProducts)
+    for (orderProduct of orderProducts) {
+      createOrderElement(orderProduct).prependTo("#order-container");
+    }
+  }).fail(error => {
+    console.error("error loading products");
+  });
 });
