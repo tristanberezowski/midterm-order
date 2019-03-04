@@ -150,5 +150,18 @@ button {
   border-radius: 2px;
   padding: 30px;
   width: 100%;
-  background-color: #fff;
+}
+
+.confirmation-message {
+  text-align: center;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  padding: 35px 25px 35px 25px;
+  width: 100%;
+  background-color: #f1f1f1;
+  margin-top: 25px;
+}
+
+.confirmation-message h4 {
+  margin-bottom: 15px;
 }

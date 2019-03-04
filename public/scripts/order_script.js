@@ -40,12 +40,30 @@ $(() => {
     url: `/api${window.location.pathname}`
   })
     .done(orderProducts => {
-      console.log(orderProducts);
+      console.log(orderProducts)
       for (orderProduct of orderProducts) {
         createOrderElement(orderProduct).prependTo("#order-container");
       }
+      return orderProducts;
     })
     .fail(error => {
       console.error("error loading products");
-    });
+    })
+    .then((orderProducts) => {//change the total display
+      //set all the totals
+      $(".price").text(() => {
+        let total = 0;
+        for (let orderProduct of orderProducts) {
+          total += Number(orderProduct.price) * Number(orderProduct.quantity);
+        }
+        $(".taxes").text("$" + (total * .05).toFixed(2));
+        $("<span>Taxes: </span>").prependTo(".taxes");
+        $(".final-price").text("$" + (total * .05 + total).toFixed(2));
+        
+        return "$" + total.toFixed(2);
+      })
+    })
+    .then(() => $("<span>Sub-Total: </span>").prependTo(".price"));
+
+  
 });
