@@ -12,7 +12,7 @@ function createOrderElement(product) {
           </div>
         </div>
 <div class="col-12 col-md-2 "><p class="order-item-quantity">Quantity: ${product.quantity}</p></div>
-        <div class="col-12 col-md-2 "><p class="order-item-price">$${product.price * product.quantity}</p></div>
+        <div class="col-12 col-md-2 "><p class="order-item-price">$${(product.price * product.quantity).toFixed(2)}</p></div>
       </div>
     </div>
   `;
@@ -33,8 +33,20 @@ $(() => {
       })
       .fail(err => {
         console.error("error posting in front end");
-      });
+      })
+      .then(() => { //change the section to show an order confirmation
+        $(".checkout-form").css("display","none");
+        $(".user-checkout h3").css("display","none");
+        let confirmedMessage = `
+        
+        `;
+        $(confirmedMessage).prependTo(".user-checkout");
+        $("").text();
+        $("").text();
+      })
   });
+
+  //load all the product orders for the current order
   $.ajax({
     method: "GET",
     url: `/api${window.location.pathname}`
