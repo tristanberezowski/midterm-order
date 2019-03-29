@@ -1,7 +1,5 @@
 # Foody, An OnLine Food Ordering APP
 
-Lighthouse Labs Web Development Program
-
 ## Project contributors
 
 Tristan Berezowski, Ralf Pinheiro, Vincent Wong
